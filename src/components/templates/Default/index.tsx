@@ -6,7 +6,7 @@ type TemplateDefaultProps = {
   children: React.ReactNode;
 };
 
-const TemplateDefault = ({ children }: TemplateDefaultProps) => (
+const TemplateDefault: React.FC<TemplateDefaultProps> = ({ children }) => (
   <S.Wrapper>{children}</S.Wrapper>
 );
 

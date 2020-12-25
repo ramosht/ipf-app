@@ -18,3 +18,8 @@ logoHeaderStories.add('Header for Pages with Title', () => (
     <Header type="page" title="Page Title" />
   </View>
 ));
+logoHeaderStories.add('Header with Title and no GoBack', () => (
+  <View style={{ backgroundColor: theme.colors.primary, flex: 1 }}>
+    <Header type="page" title="Page Title" goBack={false} />
+  </View>
+));

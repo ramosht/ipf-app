@@ -17,11 +17,7 @@ configure(() => {
 
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
 // To find allowed options for getStorybookUI
-const StorybookUIRoot = getStorybookUI({
-  asyncStorage: AsyncStorage,
-  host: '192.168.0.8',
-  port: '7007'
-});
+const StorybookUIRoot = getStorybookUI({asyncStorage: AsyncStorage});
 
 // If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
 // If you use Expo you should remove this line.

@@ -13,18 +13,16 @@ type HeaderPages = {
 const HeaderPages: React.FC<HeaderPages> = ({ title, goBack = true }) => {
   return (
     <S.Header>
-      {goBack && (
-        <S.GoBackWrapper>
-          <GoBack color={theme.colors.white} />
-        </S.GoBackWrapper>
-      )}
-      {title && (
-        <S.TitleWrapper>
+      <S.GoBackWrapper>
+        {goBack && <GoBack color={theme.colors.white} />}
+      </S.GoBackWrapper>
+      <S.TitleWrapper>
+        {title && (
           <Text color={theme.colors.white} fontSize={16} weight="Medium">
             {title}
           </Text>
-        </S.TitleWrapper>
-      )}
+        )}
+      </S.TitleWrapper>
       <S.ButtonsWrapper>
         <Notification hasNotification color={theme.colors.white} />
         <ProfilePicture style={{ marginLeft: 14 }} />

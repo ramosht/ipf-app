@@ -1,5 +1,5 @@
 // import your molecule components here
-import DefaultTitle from './DefaultTitle';
+import Text from './Text';
 
 // export it here
-export { DefaultTitle };
+export { Text };

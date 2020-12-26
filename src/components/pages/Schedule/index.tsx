@@ -3,7 +3,7 @@ import { ThemeContext } from 'styled-components';
 import { ThemeProps } from '@styles/Theme';
 
 import { Default } from '@templates/index';
-import { Text } from '@typography/index';
+import { Calendar } from '@organisms/index';
 
 const Schedule: React.FC = () => {
   const theme: ThemeProps = useContext(ThemeContext);
@@ -12,7 +12,9 @@ const Schedule: React.FC = () => {
     <Default
       header={{ title: 'Agenda', goBack: false, type: 'page' }}
       description="Veja nossa grade e reserve seu lugar"
-    />
+    >
+      <Calendar />
+    </Default>
   );
 };
 

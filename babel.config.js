@@ -18,6 +18,8 @@ module.exports = {
           "@templates": './src/components/templates',
           "@pages": './src/components/pages',
           "@typography": './src/components/typography',
+          "@contexts": './src/contexts',
+          "@assets": './src/assets',
         },
       },
     ],

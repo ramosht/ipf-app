@@ -45,11 +45,18 @@
       "@config/*": ["./src/config/*"],
       "@routes/*": ["./src/routes/*"],
       "@atoms/*": ["./src/components/atoms/*"],
+      "@atoms": ["./src/components/atoms/index"],
       "@molecules/*": ["./src/components/molecules/*"],
+      "@molecules": ["./src/components/molecules/index"],
       "@organisms/*": ["./src/components/organisms/*"],
+      "@organisms": ["./src/components/organisms/index"],
       "@templates/*": ["./src/components/templates/*"],
+      "@templates": ["./src/components/templates/index"],
       "@pages/*": ["./src/components/pages/*"],
+      "@pages": ["./src/components/pages/index"],
       "@typography/*": ["./src/components/typography/*"],
+      "@assets/*": ["./src/components/assets/*"],
+      "@contexts/*": ["./src/components/contexts/*"],
     },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */

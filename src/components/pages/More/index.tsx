@@ -9,11 +9,10 @@ const More: React.FC = () => {
   const theme: ThemeProps = useContext(ThemeContext);
 
   return (
-    <Default>
-      <Text fontSize={26} weight="Medium" color={theme.colors.lightGrey}>
-        More
-      </Text>
-    </Default>
+    <Default
+      description="Mais"
+      header={{ type: 'page', title: 'Mais', goBack: false }}
+    />
   );
 };
 

@@ -5,7 +5,7 @@ import * as S from './styles';
 
 const HeaderPrimary: React.FC = () => {
   return (
-    <S.Header style={{ elevation: 3 }}>
+    <S.Header>
       <Logo />
       <S.HeaderButtons>
         <Notification hasNotification />

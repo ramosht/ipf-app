@@ -9,7 +9,6 @@ export const Header = styled.View`
   justify-content: space-between;
   align-items: center;
   background-color: ${theme.colors.white};
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
 `;
 
 export const HeaderButtons = styled.View`

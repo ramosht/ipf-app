@@ -9,11 +9,10 @@ const Devotional: React.FC = () => {
   const theme: ThemeProps = useContext(ThemeContext);
 
   return (
-    <Default>
-      <Text fontSize={26} weight="Medium" color={theme.colors.lightGrey}>
-        Devotional
-      </Text>
-    </Default>
+    <Default
+      header={{ type: 'page', goBack: false, title: 'Devocional' }}
+      description="Artigos, estudos, notícias e devocionais"
+    />
   );
 };
 

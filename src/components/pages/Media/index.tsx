@@ -9,11 +9,10 @@ const Media: React.FC = () => {
   const theme: ThemeProps = useContext(ThemeContext);
 
   return (
-    <Default>
-      <Text fontSize={26} weight="Medium" color={theme.colors.lightGrey}>
-        Media
-      </Text>
-    </Default>
+    <Default
+      header={{ title: 'Mídia', type: 'page', goBack: false }}
+      description="Assista os nossos cultos ao vivo"
+    />
   );
 };
 

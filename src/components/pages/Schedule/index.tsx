@@ -9,11 +9,10 @@ const Schedule: React.FC = () => {
   const theme: ThemeProps = useContext(ThemeContext);
 
   return (
-    <Default>
-      <Text fontSize={26} weight="Medium" color={theme.colors.lightGrey}>
-        Schedule
-      </Text>
-    </Default>
+    <Default
+      header={{ title: 'Agenda', goBack: false, type: 'page' }}
+      description="Veja nossa grade e reserve seu lugar"
+    />
   );
 };
 

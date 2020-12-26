@@ -8,12 +8,15 @@ export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-bottom-width: 0.5px;
+  border-bottom-color: #fff;
 `;
 
 export const ButtonsWrapper = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  width: 30%;
 `;
 
 export const Title = styled.Text`
@@ -21,10 +24,10 @@ export const Title = styled.Text`
 `;
 
 export const GoBackWrapper = styled.View`
-  width: 20%;
+  width: 30%;
 `;
 
 export const TitleWrapper = styled.View`
-  width: 20%;
+  width: 30%;
   align-items: center;
 `;

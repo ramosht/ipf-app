@@ -6,9 +6,13 @@ import { ThemeProvider } from 'styled-components';
 import theme from '@styles/Theme';
 import Routes from '@routes/index';
 
+import { ScheduleProvider } from './contexts/schedule/schedule.context';
+
 const App: React.FC = () => (
   <ThemeProvider theme={theme}>
-    <Routes />
+    <ScheduleProvider>
+      <Routes />
+    </ScheduleProvider>
   </ThemeProvider>
 );
 

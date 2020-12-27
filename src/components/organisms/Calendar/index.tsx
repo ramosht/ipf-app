@@ -1,8 +1,6 @@
-import React, { useContext, useMemo, useState } from 'react';
-import { ThemeContext } from 'styled-components';
+import React, { useCallback, useMemo } from 'react';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 
-import { ThemeProps } from '@styles/Theme';
 import * as S from './styles';
 
 LocaleConfig.locales.pt = {
@@ -47,37 +45,44 @@ LocaleConfig.locales.pt = {
 };
 LocaleConfig.defaultLocale = 'pt';
 
-const CalendarComponent: React.FC = () => {
-  const theme: ThemeProps = useContext(ThemeContext);
-  const [events] = useState({
-    '2020-12-20': {
-      dots: [
-        { key: 'Escola Bíblica Dominical', color: theme.colors.midGrey },
-        { key: 'Culto de Celebração', color: theme.colors.midGrey },
-      ],
-    },
-    '2020-12-29': {
-      dots: [{ key: 'Live de Terça', color: theme.colors.midGrey }],
-    },
-  });
+type CalendarComponentProps = {
+  calendarEvents: any;
+  setCalendarEvents: (events: any) => void;
+  children?: React.ReactNode;
+};
 
+const CalendarComponent: React.FC<CalendarComponentProps> = ({
+  calendarEvents,
+  setCalendarEvents,
+}) => {
   const today = useMemo(() => {
     return new Date();
   }, []);
+
+  const handleDaySelection = useCallback(
+    (dateString: string) => {
+      setCalendarEvents({
+        ...calendarEvents,
+        [dateString]: {
+          ...calendarEvents[dateString],
+          selected: true,
+        },
+      });
+    },
+    [calendarEvents, setCalendarEvents],
+  );
 
   return (
     <S.CalendarWrapper style={{ elevation: 5 }}>
       <Calendar
         current={today}
-        onDayPress={day => {
-          console.log('selected day', day);
-        }}
+        onDayPress={({ dateString }) => handleDaySelection(dateString)}
         monthFormat="MMMM"
         onMonthChange={month => {
           console.log('month changed', month);
         }}
         markingType="multi-dot"
-        markedDates={events}
+        markedDates={{ ...calendarEvents }}
         renderArrow={direction => <S.Arrow name={`chevron-${direction}`} />}
         firstDay={1}
         onPressArrowLeft={subtractMonth => subtractMonth()}

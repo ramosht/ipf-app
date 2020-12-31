@@ -1,18 +1,23 @@
 import React from 'react'
 
 import {PostPreview} from '@molecules/index'
- 
-type DevotionalPostListProps = {
+
+type PostPreviewProps = {
+    id: string;
+    title: string;
+    category: string;
+    description: string;
+    thumbnail: string;
 }
 
-const DevotionalPostList: React.FC<DevotionalPostListProps> = ({}) => {
+type DevotionalPostListProps = {
+    posts: Array<PostPreviewProps>;
+}
+
+const DevotionalPostList: React.FC<DevotionalPostListProps> = ({posts}) => {
     return (
         <>
-            <PostPreview style={{marginBottom: 8}} />
-            <PostPreview style={{marginBottom: 8}} />
-            <PostPreview style={{marginBottom: 8}} />
-            <PostPreview style={{marginBottom: 8}} />
-            <PostPreview style={{marginBottom: 8}} />
+            {posts.map(post => <PostPreview category={post.category} id={post.id} key={post.id} title={post.title} description={post.description} thumbnail={post.thumbnail} style={{marginBottom: 8}} />)}
         </>
     )
 }

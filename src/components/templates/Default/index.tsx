@@ -40,7 +40,7 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
         )}
       </S.HeaderDescriptionWrapper>
     </S.Header>
-    {children}
+    <S.Main>{children}</S.Main>
   </S.Wrapper>
 );
 

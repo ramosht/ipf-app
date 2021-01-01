@@ -31,3 +31,7 @@ export const Wrapper = styled.View`
   flex: 1;
   background-color: ${theme.colors.white};
 `;
+
+export const Main = styled.View`
+  padding: 16px;
+`;

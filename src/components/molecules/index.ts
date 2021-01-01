@@ -1,6 +1,7 @@
 // import your molecules here
 import Header from './Header';
-import PostPreview from './PostPreview'
+import PostPreview from './PostPreview';
+import SearchField from './SearchField';
 
 // export it here
-export { Header, PostPreview };
+export { Header, PostPreview, SearchField };

@@ -8,6 +8,7 @@ type TextProps = {
   weight?: 'Light' | 'Regular' | 'Medium' | 'Bold';
   fontSize?: number;
   color?: string;
+  style?: any;
 };
 
 const Text: React.FC<TextProps> = ({
@@ -15,9 +16,15 @@ const Text: React.FC<TextProps> = ({
   weight = 'Regular',
   fontSize = 12,
   color = theme.colors.lightGrey,
+  style,
 }) => {
   return (
-    <S.TextComponent color={color} fontSize={fontSize} weight={weight}>
+    <S.TextComponent
+      style={style}
+      color={color}
+      fontSize={fontSize}
+      weight={weight}
+    >
       {children}
     </S.TextComponent>
   );

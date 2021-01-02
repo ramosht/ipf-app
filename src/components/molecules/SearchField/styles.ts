@@ -6,6 +6,8 @@ export const SearchWrapper = styled.View`
   position: relative;
   height: 42px;
   padding-left: 32px;
+  border-bottom-color: ${theme.colors.lightGrey};
+  border-bottom-width: 1px;
 `;
 
 export const SearchIcon = styled(FontAwesome5)`
@@ -15,7 +17,5 @@ export const SearchIcon = styled(FontAwesome5)`
 `;
 
 export const SearchInput = styled.TextInput`
-  border-bottom-color: ${theme.colors.lightGrey};
-  border-bottom-width: 1px;
   color: ${theme.colors.grey};
 `;

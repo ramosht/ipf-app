@@ -4,12 +4,12 @@ import { theme } from '@styles/Theme';
 import * as S from './styles';
 
 type ComponentProps = {
-  children?: React.ReactNode;
+  style?: any;
 };
 
-const Component: React.FC<ComponentProps> = ({ children }) => {
+const Component: React.FC<ComponentProps> = ({ style }) => {
   return (
-    <S.SearchWrapper>
+    <S.SearchWrapper style={style}>
       <S.SearchIcon color={theme.colors.lightGrey} size={12} name="search" />
       <S.SearchInput placeholder="Pesquisar" />
     </S.SearchWrapper>

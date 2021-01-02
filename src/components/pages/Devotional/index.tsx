@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Default } from '@templates/index';
 import { DevotionalPostList } from '@organisms/index';
 import { Text } from '@components/typography';
-import { SearchField } from '@components/molecules';
+import { SearchField, FilterPosts } from '@components/molecules';
 
 const GET_POSTS = gql`
   query {
@@ -56,7 +56,8 @@ const Devotional: React.FC = () => {
       header={{ type: 'page', goBack: false, title: 'Devocional' }}
       description="Artigos, estudos, notícias e devocionais"
     >
-      <SearchField />
+      <SearchField style={{ marginBottom: 17 }} />
+      <FilterPosts style={{ marginBottom: 25 }} />
       {posts.length > 0 ? (
         <DevotionalPostList posts={posts} />
       ) : (

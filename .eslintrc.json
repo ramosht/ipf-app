@@ -34,6 +34,7 @@
       "no-unused-expressions": "off",
       "react/prop-types": "off",
       "import/no-extraneous-dependencies": "off",
+      "array-callback-return": "off",
       "import/extensions": [
         "error",
         "ignorePackages",

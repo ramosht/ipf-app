@@ -3,6 +3,7 @@ import theme from '@styles/Theme';
 
 import { Header } from '@molecules/index';
 import { Text } from '@typography/index';
+import { ScrollView } from 'react-native-gesture-handler';
 import * as S from './styles';
 
 import HeaderBackgroundImageDefault from '../../../assets/images/headers-background/default.png';
@@ -40,7 +41,7 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
         )}
       </S.HeaderDescriptionWrapper>
     </S.Header>
-    {children}
+    <ScrollView contentContainerStyle={{ padding: 16 }}>{children}</ScrollView>
   </S.Wrapper>
 );
 

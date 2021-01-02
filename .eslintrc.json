@@ -43,7 +43,9 @@
         }
       ],
       "no-use-before-define": "off",
-      "prettier/prettier": "error"
+      "prettier/prettier": "error",
+      "@typescript-eslint/no-empty-function": "off"
+
     },
     "settings": {
       "import/resolver": {

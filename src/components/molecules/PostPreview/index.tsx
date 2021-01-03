@@ -27,13 +27,13 @@ const PostPreview: React.FC<PostPreviewProps> = ({
         <S.Thumbnail source={{ uri: `http://localhost:1337${thumbnail}` }} />
       </S.ThumbnailWrapper>
       <S.TextWrapper>
-        <Text weight="Bold" fontSize={10} color={theme.colors.primary}>
+        <Text weight="Bold" fontSize={11} color={theme.colors.primary}>
           {category}
         </Text>
         <Text weight="Bold" fontSize={14} color={theme.colors.grey}>
           {title}
         </Text>
-        <Text fontSize={10} color={theme.colors.grey}>
+        <Text fontSize={12} color={theme.colors.grey}>
           {description}
         </Text>
       </S.TextWrapper>

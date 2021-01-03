@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { Text } from '@components/typography';
 
@@ -12,13 +13,11 @@ type MoreItemProps = {
 };
 
 const MoreItem: React.FC<MoreItemProps> = ({ style, children, path }) => {
-  const actionOnPress = useCallback(() => {
-    console.log(path);
-  }, [path]);
+  const navigation = useNavigation();
 
   return (
-    <S.Wrapper style={style} onPress={() => actionOnPress(path)}>
-      <Text fontSize={14} color={theme.colors.grey}>
+    <S.Wrapper style={style} onPress={() => navigation.navigate(path)}>
+      <Text fontSize={16} color={theme.colors.grey}>
         {children}
       </Text>
       <S.Icon name="chevron-right" size={16} color={theme.colors.primary} />

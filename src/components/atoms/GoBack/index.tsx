@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import * as S from './styles';
 
@@ -9,10 +9,10 @@ type GoBackProps = {
 };
 
 const GoBack: React.FC<GoBackProps> = ({ color }) => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => null}>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
       <S.Icon color={color} name="keyboard-backspace" />
     </TouchableOpacity>
   );

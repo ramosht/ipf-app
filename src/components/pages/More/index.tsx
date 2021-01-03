@@ -10,23 +10,23 @@ const More: React.FC = () => {
   const [pages] = useState([
     {
       label: 'A igreja',
-      path: '#',
+      path: 'Igreja',
     },
     {
       label: 'Nossas redes',
-      path: '#',
+      path: 'Ministerios',
     },
     {
       label: 'Nossos projetos',
-      path: '#',
+      path: 'Projetos',
     },
     {
       label: 'Pedidos de oração',
-      path: '#',
+      path: 'PedidosDeOracao',
     },
     {
       label: 'Contribuição',
-      path: '#',
+      path: 'Contribuicao',
     },
   ]);
 

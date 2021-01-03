@@ -32,6 +32,7 @@
     "eslint-plugin-react-hooks": "^4",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
+    "popup-ui": "^1.2.2",
     "react": "16.13.1",
     "react-apollo": "^3.1.5",
     "react-native": "0.63.3",

@@ -17,6 +17,7 @@ type TemplateDefaultProps = {
   };
   description?: string;
   headerBackgroundImage?: any;
+  bodyStyle?: any;
 };
 
 const TemplateDefault: React.FC<TemplateDefaultProps> = ({
@@ -24,6 +25,7 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
   header,
   description,
   headerBackgroundImage,
+  bodyStyle,
 }) => (
   <S.Wrapper>
     <S.Header type={header.type}>
@@ -41,7 +43,12 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
         )}
       </S.HeaderDescriptionWrapper>
     </S.Header>
-    <ScrollView contentContainerStyle={{ padding: 16 }}>{children}</ScrollView>
+    <ScrollView
+      contentContainerStyle={[{ padding: 16 }, bodyStyle]}
+      keyboardShouldPersistTaps="handled"
+    >
+      {children}
+    </ScrollView>
   </S.Wrapper>
 );
 

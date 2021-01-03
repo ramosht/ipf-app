@@ -1,16 +1,15 @@
+import theme from '@styles/Theme';
 import styled from 'styled-components/native';
-import { theme } from '@styles/Theme';
 
 type WrapperProps = {
-  active: boolean;
+  disabled: boolean;
 };
 
 export const Wrapper = styled.TouchableOpacity<WrapperProps>`
   background-color: ${props =>
-    props.active ? theme.colors.primary : `${theme.colors.primary}80`};
-  padding: 8px 20px;
+    props.disabled ? `${theme.colors.secondary}75` : theme.colors.secondary};
   align-items: center;
   justify-content: center;
-  align-self: flex-start;
-  border-radius: 6px;
+  padding: 15px;
+  border-radius: 8px;
 `;

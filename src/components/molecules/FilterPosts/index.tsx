@@ -6,16 +6,32 @@ import * as S from './styles';
 
 type CategoryFilterProps = {
   style?: any;
+  filters: Array<string>;
+  setFilter: (filter: string) => void;
+  filter: string;
 };
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({ style }) => {
+const CategoryFilter: React.FC<CategoryFilterProps> = ({
+  style,
+  filters,
+  setFilter,
+  filter,
+}) => {
   return (
     <S.Wrapper style={style}>
       <Text style={{ marginRight: 18 }}>Filtrar por: </Text>
       <S.Categories
         horizontal
-        data={[0, 1, 2]}
-        renderItem={() => <FilterItem style={{ marginRight: 10 }} />}
+        data={filters}
+        renderItem={({ item }) => (
+          <FilterItem
+            key={item}
+            label={item}
+            setFilter={setFilter}
+            active={filter === item}
+            style={{ marginRight: 10 }}
+          />
+        )}
         showsHorizontalScrollIndicator={false}
       />
     </S.Wrapper>

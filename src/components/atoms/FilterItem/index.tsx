@@ -6,13 +6,21 @@ import * as S from './styles';
 
 type FilterItemProps = {
   style?: any;
+  label: string;
+  active?: boolean;
+  setFilter: (filter: string) => void;
 };
 
-const FilterItem: React.FC<FilterItemProps> = ({ style }) => {
+const FilterItem: React.FC<FilterItemProps> = ({
+  style,
+  label,
+  active = false,
+  setFilter,
+}) => {
   return (
-    <S.Wrapper style={style}>
+    <S.Wrapper onPress={() => setFilter(label)} style={style} active={active}>
       <Text weight="Bold" fontSize={12} color={theme.colors.white}>
-        Filter Item
+        {label}
       </Text>
     </S.Wrapper>
   );

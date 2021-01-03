@@ -1,5 +1,9 @@
 // import your pages here
-import Home from './Home';
+import Igreja from './Igreja';
+import Contribuicao from './Contribuicao';
+import Ministerios from './Ministerios';
+import Projetos from './Projetos';
+import PedidosDeOracao from './PedidosDeOracao';
 
 // export it here
-export { Home };
+export { Igreja, Contribuicao, Ministerios, Projetos, PedidosDeOracao };

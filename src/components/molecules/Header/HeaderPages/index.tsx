@@ -18,7 +18,12 @@ const HeaderPages: React.FC<HeaderPages> = ({ title, goBack = true }) => {
       </S.GoBackWrapper>
       <S.TitleWrapper>
         {title && (
-          <Text color={theme.colors.white} fontSize={16} weight="Medium">
+          <Text
+            style={{ textAlign: 'center' }}
+            color={theme.colors.white}
+            fontSize={16}
+            weight="Medium"
+          >
             {title}
           </Text>
         )}

@@ -28,6 +28,6 @@ export const GoBackWrapper = styled.View`
 `;
 
 export const TitleWrapper = styled.View`
-  width: 30%;
+  width: 40%;
   align-items: center;
 `;

@@ -4,6 +4,16 @@ import Notification from './Notification';
 import ProfilePicture from './ProfilePicture';
 import GoBack from './GoBack';
 import FilterItem from './FilterItem';
+import Button from './Button';
+import TextInput from './TextInput';
 
 // export it here
-export { Logo, Notification, ProfilePicture, GoBack, FilterItem };
+export {
+  Logo,
+  Notification,
+  ProfilePicture,
+  GoBack,
+  FilterItem,
+  Button,
+  TextInput,
+};

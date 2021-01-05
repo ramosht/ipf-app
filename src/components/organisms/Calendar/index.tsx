@@ -88,7 +88,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
       <CalendarList
         current={today}
         horizontal
-        calendarWidth={windowWidth - 36}
+        calendarWidth={windowWidth - 32}
         pastScrollRange={0}
         futureScrollRange={2}
         pagingEnabled

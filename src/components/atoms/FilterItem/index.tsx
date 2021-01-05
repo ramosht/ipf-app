@@ -6,7 +6,7 @@ import * as S from './styles';
 
 type FilterItemProps = {
   style?: any;
-  label: string;
+  label: string | unknown;
   active?: boolean;
   setFilter: (filter: string) => void;
 };

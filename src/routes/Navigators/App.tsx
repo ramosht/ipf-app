@@ -6,6 +6,7 @@ import Ministerios from '@pages/Ministerios';
 import Projetos from '@pages/Projetos';
 import PedidosDeOracao from '@pages/PedidosDeOracao';
 import Contribuicao from '@pages/Contribuicao';
+import Post from '@pages/Post';
 import BottomBar from './BottomBar';
 
 const Stack = createStackNavigator();
@@ -29,6 +30,8 @@ const App: React.FC = () => {
       <Stack.Screen name="Projetos" component={Projetos} />
       <Stack.Screen name="PedidosDeOracao" component={PedidosDeOracao} />
       <Stack.Screen name="Contribuicao" component={Contribuicao} />
+
+      <Stack.Screen name="Post" component={Post} />
     </Stack.Navigator>
   );
 };

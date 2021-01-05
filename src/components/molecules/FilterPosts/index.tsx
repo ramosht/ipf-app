@@ -23,9 +23,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       <S.Categories
         horizontal
         data={filters}
-        renderItem={({ item }) => (
+        keyExtractor={(item: any) => item}
+        renderItem={({ item, index }) => (
           <FilterItem
-            key={item}
             label={item}
             setFilter={setFilter}
             active={filter === item}

@@ -2,6 +2,7 @@ import React from 'react';
 import { theme } from '@styles/Theme';
 
 import { Text } from '@typography/index';
+import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
 
 type PostPreviewProps = {
@@ -21,8 +22,13 @@ const PostPreview: React.FC<PostPreviewProps> = ({
   description,
   thumbnail,
 }) => {
+  const navigation = useNavigation();
+
   return (
-    <S.Wrapper style={{ ...style }}>
+    <S.Wrapper
+      style={{ ...style }}
+      onPress={() => navigation.navigate('Post', { postId: id })}
+    >
       <S.ThumbnailWrapper>
         <S.Thumbnail source={{ uri: `http://localhost:1337${thumbnail}` }} />
       </S.ThumbnailWrapper>

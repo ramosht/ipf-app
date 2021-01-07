@@ -37,7 +37,8 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
       <S.Body style={{ elevation: 5 }}>
         <ScrollView
           contentContainerStyle={{
-            paddingVertical: 16,
+            paddingBottom: 16,
+            paddingTop: 32,
           }}
         >
           <Text

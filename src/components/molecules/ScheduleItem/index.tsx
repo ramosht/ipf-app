@@ -6,11 +6,12 @@ import * as S from './styles';
 
 type ScheduleItemProps = {
   children?: React.ReactNode;
+  style?: Object;
 };
 
-const ScheduleItem: React.FC<ScheduleItemProps> = ({ children }) => {
+const ScheduleItem: React.FC<ScheduleItemProps> = ({ children, style }) => {
   return (
-    <S.Wrapper style={{ elevation: 5 }}>
+    <S.Wrapper style={{ elevation: 5, ...style }}>
       <S.ThumbnailWrapper />
       <S.Thumbnail
         source={{

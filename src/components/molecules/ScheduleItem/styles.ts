@@ -6,7 +6,7 @@ export const Wrapper = styled.View`
   background: #fff;
   padding: 16px;
   flex-direction: row;
-  border-radius: 8px;
+  border-radius: 14px;
 `;
 
 export const ThumbnailWrapper = styled.View``;
@@ -14,7 +14,7 @@ export const ThumbnailWrapper = styled.View``;
 export const Thumbnail = styled.Image`
   width: 90px;
   height: 90px;
-  border-radius: 8px;
+  border-radius: 14px;
   margin-right: 13px;
 `;
 

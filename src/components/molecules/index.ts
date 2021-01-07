@@ -6,6 +6,7 @@ import FilterPosts from './FilterPosts';
 import MoreItem from './MoreItem';
 import ContributionVerse from './ContributionVerse';
 import BankAccount from './BankAccount';
+import ScheduleItem from './ScheduleItem';
 
 // export it here
 export {
@@ -16,4 +17,5 @@ export {
   MoreItem,
   ContributionVerse,
   BankAccount,
+  ScheduleItem,
 };

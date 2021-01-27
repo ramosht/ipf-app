@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import theme from '@styles/Theme';
-import { useQuery, gql } from '@apollo/client';
 
 import { Default } from '@components/templates';
 import { Text } from '@components/typography';
@@ -13,17 +12,6 @@ type ContribuicaoProps = {
   children?: React.ReactNode;
 };
 
-const GET_BANK_ACCOUNTS = gql`
-  query {
-    contributions {
-      id
-      bank
-      agency
-      account
-    }
-  }
-`;
-
 type BankAccount = {
   id: string;
   bank: string;
@@ -34,7 +22,7 @@ type BankAccount = {
 const Contribuicao: React.FC<ContribuicaoProps> = ({ children }) => {
   const [bankAccounts, setBankAccounts] = useState<Array<BankAccount>>([]);
 
-  const { loading, error, data } = useQuery(GET_BANK_ACCOUNTS);
+  const data = null;
 
   useEffect(() => {
     if (data) {

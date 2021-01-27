@@ -6,20 +6,19 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from '@styles/Theme';
 import Routes from '@routes/index';
-import { ApolloProvider } from '@apollo/client';
 import { Root } from 'popup-ui';
-import apolloClient from './services/apolloClient';
 
 import { ScheduleProvider } from './contexts/schedule/schedule.context';
+import { AuthenticationProvider } from './contexts/authentication/authentication.context';
 
 const App: React.FC = () => (
   <Root>
     <ThemeProvider theme={theme}>
-      <ApolloProvider client={apolloClient}>
+      <AuthenticationProvider>
         <ScheduleProvider>
           <Routes />
         </ScheduleProvider>
-      </ApolloProvider>
+      </AuthenticationProvider>
     </ThemeProvider>
   </Root>
 );

@@ -5,7 +5,7 @@ import HeaderPages from './HeaderPages';
 
 type HeaderProps = {
   title?: string;
-  type: 'main' | 'page';
+  type: 'main' | 'page' | 'auth';
   goBack?: boolean;
 };
 

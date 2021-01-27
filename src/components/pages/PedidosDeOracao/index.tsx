@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
 import { Toast } from 'popup-ui';
 
 import { Default } from '@components/templates';
@@ -7,38 +6,24 @@ import { TextInput, Button } from '@atoms/index';
 
 import { Keyboard, View } from 'react-native';
 
-const CREATE_PRAYER_REQUEST = gql`
-  mutation PrayerRequest($input: createPrayerRequestInput) {
-    createPrayerRequest(input: $input) {
-      prayerRequest {
-        userName
-        userEmail
-        userPhone
-      }
-    }
-  }
-`;
-
 const Contribuicao: React.FC = () => {
   const [prayerRequest, setPrayerRequest] = useState('');
-
-  const [createPrayerRequest] = useMutation(CREATE_PRAYER_REQUEST);
 
   const handlePrayerRequestCreation = useCallback(() => {
     Keyboard.dismiss();
 
-    createPrayerRequest({
-      variables: {
-        input: {
-          data: {
-            userName: 'Guilherme Ramos',
-            userEmail: 'guilhermeht.ramos@gmail.com',
-            userPhone: '15981376104',
-            prayerRequest,
-          },
-        },
-      },
-    });
+    // createPrayerRequest({
+    //   variables: {
+    //     input: {
+    //       data: {
+    //         userName: 'Guilherme Ramos',
+    //         userEmail: 'guilhermeht.ramos@gmail.com',
+    //         userPhone: '15981376104',
+    //         prayerRequest,
+    //       },
+    //     },
+    //   },
+    // });
 
     setPrayerRequest('');
 
@@ -47,7 +32,7 @@ const Contribuicao: React.FC = () => {
       text: 'Estaremos em oração por você.',
       color: '#2ecc71',
     });
-  }, [createPrayerRequest, prayerRequest]);
+  }, []);
 
   return (
     <Default

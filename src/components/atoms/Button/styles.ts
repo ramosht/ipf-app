@@ -7,7 +7,7 @@ type WrapperProps = {
 
 export const Wrapper = styled.TouchableOpacity<WrapperProps>`
   background-color: ${props =>
-    props.disabled ? `${theme.colors.secondary}75` : theme.colors.secondary};
+    props.disabled ? `${theme.colors.secondary}90` : theme.colors.secondary};
   align-items: center;
   justify-content: center;
   padding: 15px;

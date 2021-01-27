@@ -1,24 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
 
 import { PostTemplate } from '@templates/index';
 import { Text } from '@components/typography';
 import { useRoute, useNavigation } from '@react-navigation/native';
-
-const GET_POST_BY_ID = gql`
-  query GET_POST($postId: ID!) {
-    post(id: $postId) {
-      id
-      title
-      description
-      category
-      body
-      thumbnail {
-        url
-      }
-    }
-  }
-`;
 
 type PostProps = {
   title: string;
@@ -43,11 +27,7 @@ const Post: React.FC = () => {
     }
   }, []);
 
-  const { loading, error, data } = useQuery(GET_POST_BY_ID, {
-    variables: {
-      postId,
-    },
-  });
+  const data = null;
 
   useEffect(() => {
     if (data) {
@@ -69,8 +49,8 @@ const Post: React.FC = () => {
       htmlTitle={post.title}
     />
   ) : (
-    <Text>N</Text>
-  );
+      <Text>N</Text>
+    );
 };
 
 export default Post;

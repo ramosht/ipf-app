@@ -21,7 +21,6 @@ const Schedule: React.FC = () => {
         setCalendarEvents={setCalendarEvents}
         selectedDay={selectedDay}
         setSelectedDay={setSelectedDay}
-        style={{ marginBottom: 16 }}
       />
 
       <View>

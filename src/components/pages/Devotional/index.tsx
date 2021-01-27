@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, gql } from '@apollo/client';
 
 import { Default } from '@templates/index';
 import { DevotionalPostList } from '@organisms/index';
@@ -7,20 +6,6 @@ import { Text } from '@components/typography';
 import { SearchField, FilterPosts } from '@components/molecules';
 import theme from '@styles/Theme';
 import { ScreenStackHeaderRightView } from 'react-native-screens';
-
-const GET_POSTS = gql`
-  query {
-    posts {
-      id
-      title
-      category
-      description
-      thumbnail {
-        url
-      }
-    }
-  }
-`;
 
 type PostPreviewProps = {
   id: string;
@@ -38,7 +23,9 @@ const Devotional: React.FC = () => {
   const [categories, setCategories] = useState<Array<string>>([]);
   const [filter, setFilter] = useState<string>('Todos');
   const [search, setSearch] = useState<string>('');
-  const { loading, error, data } = useQuery(GET_POSTS);
+
+  const loading = false;
+  const data = null;
 
   useEffect(() => {
     if (!loading && data) {
@@ -85,8 +72,8 @@ const Devotional: React.FC = () => {
       {posts.length > 0 ? (
         <DevotionalPostList posts={posts} />
       ) : (
-        <Text>Não há posts :(</Text>
-      )}
+          <Text>Não há posts :(</Text>
+        )}
     </Default>
   );
 };

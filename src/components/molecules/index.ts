@@ -7,6 +7,7 @@ import MoreItem from './MoreItem';
 import ContributionVerse from './ContributionVerse';
 import BankAccount from './BankAccount';
 import ScheduleItem from './ScheduleItem';
+import PasswordDemands from './PasswordDemands';
 
 // export it here
 export {
@@ -18,4 +19,5 @@ export {
   ContributionVerse,
   BankAccount,
   ScheduleItem,
+  PasswordDemands,
 };

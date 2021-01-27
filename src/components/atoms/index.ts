@@ -6,6 +6,7 @@ import GoBack from './GoBack';
 import FilterItem from './FilterItem';
 import Button from './Button';
 import TextInput from './TextInput';
+import PasswordInput from './PasswordInput';
 
 // export it here
 export {
@@ -16,4 +17,5 @@ export {
   FilterItem,
   Button,
   TextInput,
+  PasswordInput,
 };

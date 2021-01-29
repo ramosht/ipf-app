@@ -45,6 +45,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/jsx-curly-newline": "off",
     "class-methods-use-this": "off",
+    "react/jsx-indent": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

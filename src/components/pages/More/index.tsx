@@ -4,7 +4,7 @@ import { ThemeProps } from '@styles/Theme';
 
 import { Default } from '@templates/index';
 import { Text } from '@typography/index';
-import { MoreItem } from '@components/molecules';
+import { Logout, MoreItem } from '@components/molecules';
 
 const More: React.FC = () => {
   const [pages] = useState([
@@ -31,16 +31,19 @@ const More: React.FC = () => {
   ]);
 
   return (
-    <Default
-      description="Mais"
-      header={{ type: 'page', title: 'Mais', goBack: false }}
-    >
-      {pages.map(page => (
-        <MoreItem key={page.label} path={page.path}>
-          {page.label}
-        </MoreItem>
-      ))}
-    </Default>
+    <>
+      <Default
+        description="Mais"
+        header={{ type: 'page', title: 'Mais', goBack: false }}
+      >
+        {pages.map(page => (
+          <MoreItem key={page.label} path={page.path}>
+            {page.label}
+          </MoreItem>
+        ))}
+      </Default>
+      <Logout />
+    </>
   );
 };
 

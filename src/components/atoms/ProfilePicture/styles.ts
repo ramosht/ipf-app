@@ -1,11 +1,10 @@
-import { CSSProperties } from 'react';
 import styled from 'styled-components/native';
 
 type PictureWrapperProps = {
-  style: CSSProperties;
+  style: Object;
 };
 
-export const PictureWrapper = styled.View<PictureWrapperProps>`
+export const PictureWrapper = styled.TouchableOpacity<PictureWrapperProps>`
   width: 36px;
   height: 36px;
 `;

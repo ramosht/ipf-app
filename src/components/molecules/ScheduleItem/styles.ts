@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export const Wrapper = styled.View`
+export const Wrapper = styled.TouchableOpacity`
   background: #fff;
   padding: 16px;
   flex-direction: row;

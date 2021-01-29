@@ -1,18 +1,25 @@
 import React from 'react';
 
+import { useNavigation } from '@react-navigation/native';
 import * as S from './styles';
+import { useUser } from '../../../contexts/user/user.context';
 
 type ProfilePictureProps = {
   style?: React.CSSProperties;
 };
 
 const ProfilePicture: React.FC<ProfilePictureProps> = ({ style }) => {
+  const { user } = useUser();
+  const navigation = useNavigation();
+
   return (
-    <S.PictureWrapper style={{ ...style }}>
+    <S.PictureWrapper
+      onPress={() => navigation.navigate('Profile')}
+      style={{ ...style }}
+    >
       <S.Picture
         source={{
-          uri:
-            'https://pbs.twimg.com/profile_images/1319078690853167106/EeOnRVMS_400x400.jpg',
+          uri: user?.image,
         }}
       />
     </S.PictureWrapper>

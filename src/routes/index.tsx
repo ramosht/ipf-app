@@ -9,7 +9,8 @@ const Routes: React.FC = () => {
   const { userIsAuthenticated } = useAuthentication();
   return (
     <NavigationContainer>
-      {userIsAuthenticated ? <AppNavigator /> : <AuthNavigator />}
+      <AppNavigator />
+      {/* {userIsAuthenticated ? <AppNavigator /> : <AuthNavigator />} */}
     </NavigationContainer>
   );
 };

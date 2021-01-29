@@ -1,4 +1,5 @@
 import { Text } from '@components/typography';
+import { useNavigation } from '@react-navigation/native';
 import { theme } from '@styles/Theme';
 import React from 'react';
 
@@ -10,8 +11,13 @@ type ScheduleItemProps = {
 };
 
 const ScheduleItem: React.FC<ScheduleItemProps> = ({ children, style }) => {
+  const navigation = useNavigation();
+
   return (
-    <S.Wrapper style={{ elevation: 5, ...style }}>
+    <S.Wrapper
+      style={{ elevation: 5, ...style }}
+      onPress={() => navigation.navigate('EventInfo')}
+    >
       <S.ThumbnailWrapper />
       <S.Thumbnail
         source={{

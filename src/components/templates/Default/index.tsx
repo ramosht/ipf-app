@@ -28,20 +28,26 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
   bodyStyle,
 }) => (
   <S.Wrapper>
-    <S.Header type={header.type}>
+    <S.Header type={header.type} hasDescription={!!description}>
       {header.type === 'page' && (
         <S.HeaderBackground
           source={headerBackgroundImage || HeaderBackgroundImageDefault}
         />
       )}
-      <Header type={header.type} title={header.title} goBack={header.goBack} />
-      <S.HeaderDescriptionWrapper>
-        {description && (
+      <Header
+        type={header.type}
+        title={header.title}
+        goBack={header.goBack}
+        hasDescription={!!description}
+      />
+
+      {description && (
+        <S.HeaderDescriptionWrapper>
           <Text fontSize={20} weight="Bold" color={theme.colors.white}>
             {description}
           </Text>
-        )}
-      </S.HeaderDescriptionWrapper>
+        </S.HeaderDescriptionWrapper>
+      )}
     </S.Header>
     <ScrollView
       contentContainerStyle={[{ padding: 16 }, bodyStyle]}

@@ -2,13 +2,17 @@ import styled from 'styled-components/native';
 
 import { theme } from '@styles/Theme';
 
-export const Header = styled.View`
+type HeaderProps = {
+  hasDescription?: boolean;
+};
+
+export const Header = styled.View<HeaderProps>`
   width: 100%;
   padding: 22px 16px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom-width: 0.5px;
+  border-bottom-width: ${props => (props.hasDescription ? '0.5px' : '0')};
   border-bottom-color: #fff;
 `;
 

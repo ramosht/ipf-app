@@ -8,11 +8,16 @@ import * as S from './styles';
 type HeaderPages = {
   title?: string;
   goBack?: boolean;
+  hasDescription?: boolean;
 };
 
-const HeaderPages: React.FC<HeaderPages> = ({ title, goBack = true }) => {
+const HeaderPages: React.FC<HeaderPages> = ({
+  title,
+  goBack = true,
+  hasDescription,
+}) => {
   return (
-    <S.Header>
+    <S.Header hasDescription={hasDescription}>
       <S.GoBackWrapper>
         {goBack && <GoBack color={theme.colors.white} />}
       </S.GoBackWrapper>
@@ -34,7 +39,7 @@ const HeaderPages: React.FC<HeaderPages> = ({ title, goBack = true }) => {
         )}
       </S.TitleWrapper>
       <S.ButtonsWrapper>
-        <Notification hasNotification color={theme.colors.white} />
+        <Notification color={theme.colors.white} />
         <ProfilePicture style={{ marginLeft: 14 }} />
       </S.ButtonsWrapper>
     </S.Header>

@@ -4,11 +4,12 @@ import theme from '@styles/Theme';
 
 type HeaderProps = {
   type: 'main' | 'page';
+  hasDescription: boolean;
 };
 
 export const Header = styled.View<HeaderProps>`
   position: relative;
-  border-bottom-right-radius: 85px;
+  border-bottom-right-radius: ${props => (props.hasDescription ? '85px' : '0')};
   overflow: hidden;
 `;
 

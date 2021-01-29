@@ -6,12 +6,13 @@ type IconProps = {
   color: string;
 };
 
-export const Icon = styled(Ionicons)<IconProps>`
+// eslint-disable-next-line prettier/prettier
+export const Icon = styled(Ionicons) <IconProps>`
   font-size: 28px;
   color: ${props => props.color || theme.colors.lightGrey};
 `;
 
-export const IconWrapper = styled.View`
+export const IconWrapper = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   position: relative;

@@ -3,8 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { AuthenticationTemplate } from '@templates';
 import { TextInput, PasswordInput } from '@atoms/index';
 import { passwordRegex } from '@config/utils';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { PasswordDemands } from '@components/molecules';
 import { useAuthentication } from '../../../../contexts/authentication/authentication.context';
 

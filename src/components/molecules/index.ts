@@ -8,6 +8,9 @@ import ContributionVerse from './ContributionVerse';
 import BankAccount from './BankAccount';
 import ScheduleItem from './ScheduleItem';
 import PasswordDemands from './PasswordDemands';
+import Logout from './Logout';
+import EditProfilePicture from './EditProfilePicture';
+import Notification from './Notification';
 
 // export it here
 export {
@@ -20,4 +23,7 @@ export {
   BankAccount,
   ScheduleItem,
   PasswordDemands,
+  Logout,
+  EditProfilePicture,
+  Notification,
 };

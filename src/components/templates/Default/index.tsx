@@ -4,6 +4,7 @@ import theme from '@styles/Theme';
 import { Header } from '@molecules/index';
 import { Text } from '@typography/index';
 import { ScrollView } from 'react-native-gesture-handler';
+import { View } from 'react-native';
 import * as S from './styles';
 
 import HeaderBackgroundImageDefault from '../../../assets/images/headers-background/default.png';
@@ -18,6 +19,7 @@ type TemplateDefaultProps = {
   description?: string;
   headerBackgroundImage?: any;
   bodyStyle?: any;
+  scrollView?: boolean;
 };
 
 const TemplateDefault: React.FC<TemplateDefaultProps> = ({
@@ -26,6 +28,7 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
   description,
   headerBackgroundImage,
   bodyStyle,
+  scrollView = true,
 }) => (
   <S.Wrapper>
     <S.Header type={header.type} hasDescription={!!description}>
@@ -49,12 +52,17 @@ const TemplateDefault: React.FC<TemplateDefaultProps> = ({
         </S.HeaderDescriptionWrapper>
       )}
     </S.Header>
-    <ScrollView
-      contentContainerStyle={[{ padding: 16 }, bodyStyle]}
-      keyboardShouldPersistTaps="handled"
-    >
-      {children}
-    </ScrollView>
+    {scrollView && (
+      <ScrollView
+        contentContainerStyle={[{ padding: 16 }, bodyStyle]}
+        keyboardShouldPersistTaps="handled"
+      >
+        {children}
+      </ScrollView>
+    )}
+    {!scrollView && (
+      <View style={[{ padding: 16 }, bodyStyle]}>{children}</View>
+    )}
   </S.Wrapper>
 );
 

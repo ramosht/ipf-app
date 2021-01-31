@@ -11,6 +11,7 @@ import PasswordDemands from './PasswordDemands';
 import Logout from './Logout';
 import EditProfilePicture from './EditProfilePicture';
 import Notification from './Notification';
+import CardHome from './CardHome';
 
 // export it here
 export {
@@ -26,4 +27,5 @@ export {
   Logout,
   EditProfilePicture,
   Notification,
+  CardHome,
 };

@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Default } from '@templates/index';
 import { DevotionalPostList } from '@organisms/index';
 import { Text } from '@components/typography';
-import { SearchField, FilterPosts } from '@components/molecules';
-import theme from '@styles/Theme';
-import { ScreenStackHeaderRightView } from 'react-native-screens';
+// import { SearchField, FilterPosts } from '@components/molecules';
+import ArticlesService from '@services/articles';
+import { Alert } from 'react-native';
+import { Loading } from '@components/atoms';
+import { useLoading } from '../../../contexts/loading/loading.context';
 
 type PostPreviewProps = {
   id: string;
@@ -17,64 +19,66 @@ type PostPreviewProps = {
 
 const Devotional: React.FC = () => {
   const [posts, setPosts] = useState<Array<PostPreviewProps>>([]);
-  const [filteredPosts, setFilteredPosts] = useState<Array<PostPreviewProps>>(
-    [],
-  );
-  const [categories, setCategories] = useState<Array<string>>([]);
-  const [filter, setFilter] = useState<string>('Todos');
-  const [search, setSearch] = useState<string>('');
-
-  const loading = false;
-  const data = null;
+  // const [categories, setCategories] = useState<Array<string>>([]);
+  // const [filter, setFilter] = useState<string>('Todos');
+  // const [search, setSearch] = useState<string>('');
+  const { loading, setLoading } = useLoading();
 
   useEffect(() => {
-    if (!loading && data) {
-      const postsSanitized: Array<PostPreviewProps> = [];
-      const categoriesSanitized: Array<string> = [];
+    const getArticles = async () => {
+      setLoading(true);
+      const res = await ArticlesService.getArticles();
 
-      data.posts.map((post: any) => {
-        postsSanitized.push({
-          id: post.id,
-          title: post.title,
-          description: post.description,
-          category: post.category,
-          thumbnail: post.thumbnail.url,
-        });
+      if (res?.articles) {
+        setLoading(false);
+        const postsSanitized: PostPreviewProps[] = [];
 
-        if (categoriesSanitized.indexOf(post.category) === -1) {
-          categoriesSanitized.push(post.category);
-        }
-      });
+        res.articles.map((article: any) =>
+          postsSanitized.push({
+            category: article.category.title,
+            description: article.description,
+            id: article.id,
+            thumbnail: article.thumbnail,
+            title: article.title,
+          }),
+        );
 
-      setPosts(postsSanitized);
-      setCategories(['Todos', ...categoriesSanitized]);
-    }
-  }, [loading, data]);
+        setPosts(postsSanitized);
+      } else {
+        setLoading(false);
+        Alert.alert('Ocorreu um erro', res.message, [
+          { text: 'Tudo bem', onPress: () => null },
+        ]);
+      }
+    };
+
+    getArticles();
+  }, []);
 
   return (
-    <Default
-      header={{ type: 'page', goBack: false, title: 'Devocional' }}
-      description="Artigos, estudos, notícias e devocionais"
-    >
-      <SearchField
-        search={search}
-        setSearch={setSearch}
-        style={{ marginBottom: 17 }}
-      />
+    <>
+      {loading && <Loading />}
+      <Default
+        header={{ type: 'page', goBack: false, title: 'Devocional' }}
+        description="Artigos, estudos, notícias e devocionais"
+      >
+        {/* <SearchField
+          search={search}
+          setSearch={setSearch}
+          style={{ marginBottom: 17 }}
+        />
 
-      <FilterPosts
-        filters={categories}
-        setFilter={setFilter}
-        filter={filter}
-        style={{ marginBottom: 25 }}
-      />
+        <FilterPosts
+          filters={categories}
+          setFilter={setFilter}
+          filter={filter}
+          style={{ marginBottom: 25 }}
+        /> */}
 
-      {posts.length > 0 ? (
-        <DevotionalPostList posts={posts} />
-      ) : (
-          <Text>Não há posts :(</Text>
-        )}
-    </Default>
+        {posts.length > 0 && <DevotionalPostList posts={posts} />}
+        {posts.length === 0 && <Text>Não há posts :(</Text>}
+      </Default>
+    </>
   );
 };
 

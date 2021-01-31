@@ -22,7 +22,7 @@ const More: React.FC = () => {
     },
     {
       label: 'Pedidos de oração',
-      path: 'PedidosDeOracao',
+      path: 'PrayerRequests',
     },
     {
       label: 'Contribuição',

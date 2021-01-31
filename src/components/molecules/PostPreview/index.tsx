@@ -30,7 +30,7 @@ const PostPreview: React.FC<PostPreviewProps> = ({
       onPress={() => navigation.navigate('Post', { postId: id })}
     >
       <S.ThumbnailWrapper>
-        <S.Thumbnail source={{ uri: `http://localhost:1337${thumbnail}` }} />
+        <S.Thumbnail source={{ uri: thumbnail }} />
       </S.ThumbnailWrapper>
       <S.TextWrapper>
         <Text weight="Bold" fontSize={11} color={theme.colors.primary}>

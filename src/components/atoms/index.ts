@@ -7,6 +7,7 @@ import FilterItem from './FilterItem';
 import Button from './Button';
 import TextInput from './TextInput';
 import PasswordInput from './PasswordInput';
+import Loading from './Loading';
 
 // export it here
 export {
@@ -18,4 +19,5 @@ export {
   Button,
   TextInput,
   PasswordInput,
+  Loading,
 };

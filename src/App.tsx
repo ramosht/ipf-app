@@ -11,16 +11,19 @@ import { UserProvider } from './contexts/user/user.context';
 
 import { ScheduleProvider } from './contexts/schedule/schedule.context';
 import { AuthenticationProvider } from './contexts/authentication/authentication.context';
+import { LoadingProvider } from './contexts/loading/loading.context';
 
 const App: React.FC = () => (
   <Root>
     <ThemeProvider theme={theme}>
       <AuthenticationProvider>
-        <UserProvider>
-          <ScheduleProvider>
-            <Routes />
-          </ScheduleProvider>
-        </UserProvider>
+        <LoadingProvider>
+          <UserProvider>
+            <ScheduleProvider>
+              <Routes />
+            </ScheduleProvider>
+          </UserProvider>
+        </LoadingProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   </Root>

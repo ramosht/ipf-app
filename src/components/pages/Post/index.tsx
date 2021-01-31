@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { PostTemplate } from '@templates/index';
-import { Text } from '@components/typography';
 import { useRoute, useNavigation } from '@react-navigation/native';
+import ArticleService from '@services/articles';
+import { Alert } from 'react-native';
+import { Loading } from '@components/atoms';
+import { useLoading } from '../../../contexts/loading/loading.context';
 
 type PostProps = {
   title: string;
@@ -13,7 +16,8 @@ type PostProps = {
 
 const Post: React.FC = () => {
   const route = useRoute();
-  const navigate = useNavigation();
+  const navigation = useNavigation();
+  const { loading, setLoading } = useLoading();
 
   const [post, setPost] = useState<PostProps | null>(null);
   const [postId, setPostId] = useState<string | null>(null);
@@ -23,34 +27,48 @@ const Post: React.FC = () => {
       const id = route.params?.postId;
       setPostId(id);
     } catch (err) {
-      navigate.goBack();
+      navigation.goBack();
     }
   }, []);
 
-  const data = null;
-
   useEffect(() => {
-    if (data) {
-      setPost({
-        title: data.post.title,
-        description: data.post.description,
-        thumbnail: data.post.thumbnail.url,
-        body: data.post.body,
-      });
-    }
-  }, [data]);
+    const getArticle = async () => {
+      setLoading(true);
+      const res = await ArticleService.getArticleById(postId);
 
-  return post ? (
-    <PostTemplate
-      title="Devocional"
-      thumbnail={post.thumbnail}
-      description={post.description}
-      html={post.body}
-      htmlTitle={post.title}
-    />
-  ) : (
-      <Text>N</Text>
-    );
+      if (res.article) {
+        setLoading(false);
+        setPost({
+          body: res.article.body,
+          title: res.article.title,
+          description: res.article.description,
+          thumbnail: res.article.thumbnail,
+        });
+      } else {
+        setLoading(false);
+        Alert.alert('Ocorreu um erro', res.message, [
+          { text: 'Voltar', onPress: () => navigation.goBack() },
+        ]);
+      }
+    };
+
+    getArticle();
+  }, [postId]);
+
+  return (
+    <>
+      {loading && <Loading />}
+      {post && (
+        <PostTemplate
+          title="Devocional"
+          thumbnail={post.thumbnail}
+          description={post.description}
+          html={post.body}
+          htmlTitle={post.title}
+        />
+      )}
+    </>
+  );
 };
 
 export default Post;

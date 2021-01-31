@@ -8,7 +8,7 @@ const UserContext = React.createContext<UserStateProps>({
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>({
-    id: '876405cb-7e11-4e79-b760-3639d3a4eb80',
+    id: '9701b1ba-af9a-459b-9c2a-6c655dc20a61',
     username: 'Guilherme Ramos',
     email: 'guilhermeht.ramos@gmail.com',
     phoneNumber: '15981376104',

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { theme } from '@styles/Theme';
 
@@ -5,7 +6,15 @@ import * as S from './styles';
 
 type TextProps = {
   children: React.ReactNode;
-  weight?: 'Light' | 'Regular' | 'Medium' | 'Bold';
+  weight?:
+  | 'Light'
+  | 'Regular'
+  | 'Medium'
+  | 'Bold'
+  | 'LightItalic'
+  | 'MediumItalic'
+  | 'BoldItalic'
+  | 'Italic';
   fontSize?: number;
   color?: string;
   style?: any;

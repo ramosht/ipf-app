@@ -2,11 +2,11 @@ import { Default } from '@components/templates';
 import { Text } from '@components/typography';
 import React from 'react';
 
-type ProjetosProps = {
+type ProjectsProps = {
   children?: React.ReactNode;
 };
 
-const Projetos: React.FC<ProjetosProps> = ({ children }) => {
+const Projects: React.FC<ProjectsProps> = ({ children }) => {
   return (
     <Default
       description="Nossos projetos"
@@ -17,4 +17,4 @@ const Projetos: React.FC<ProjetosProps> = ({ children }) => {
   );
 };
 
-export default Projetos;
+export default Projects;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Igreja from '@pages/Igreja';
-import Ministerios from '@pages/Ministerios';
-import Projetos from '@pages/Projetos';
-import PedidosDeOracao from '@pages/PedidosDeOracao';
-import Contribuicao from '@pages/Contribuicao';
+import AboutUs from '@pages/Igreja';
+import Ministries from '@components/pages/Ministries';
+import Projects from '@pages/Projects';
+import PrayerRequests from '@components/pages/PrayerRequests';
+import Contribution from '@components/pages/Contribution';
 import Post from '@pages/Post';
 import Profile from '@pages/Profile';
 import Notifications from '@pages/Notifications';
@@ -30,11 +30,11 @@ const App: React.FC = () => {
         <Stack.Screen name="Schedule" component={BottomBar} />
         <Stack.Screen name="More" component={BottomBar} />
 
-        <Stack.Screen name="Igreja" component={Igreja} />
-        <Stack.Screen name="Ministerios" component={Ministerios} />
-        <Stack.Screen name="Projetos" component={Projetos} />
-        <Stack.Screen name="PedidosDeOracao" component={PedidosDeOracao} />
-        <Stack.Screen name="Contribuicao" component={Contribuicao} />
+        <Stack.Screen name="AboutUs" component={AboutUs} />
+        <Stack.Screen name="Ministries" component={Ministries} />
+        <Stack.Screen name="Projects" component={Projects} />
+        <Stack.Screen name="PrayerRequests" component={PrayerRequests} />
+        <Stack.Screen name="Contribution" component={Contribution} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Notifications" component={Notifications} />
         <Stack.Screen name="EventInfo" component={EventInfo} />

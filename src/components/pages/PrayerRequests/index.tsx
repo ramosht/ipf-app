@@ -1,38 +1,42 @@
 import React, { useCallback, useState } from 'react';
 import { Toast } from 'popup-ui';
-
+import PrayerRequest from '@services/prayerRequest';
 import { Default } from '@components/templates';
 import { TextInput, Button } from '@atoms/index';
 
-import { Keyboard, View } from 'react-native';
+import { Alert, Keyboard, View } from 'react-native';
+import { useUser } from '../../../contexts/user/user.context';
 
 const Contribuicao: React.FC = () => {
   const [prayerRequest, setPrayerRequest] = useState('');
+  const { user } = useUser();
 
   const handlePrayerRequestCreation = useCallback(() => {
-    Keyboard.dismiss();
+    const createPrayerRequest = async () => {
+      Keyboard.dismiss();
 
-    // createPrayerRequest({
-    //   variables: {
-    //     input: {
-    //       data: {
-    //         userName: 'Guilherme Ramos',
-    //         userEmail: 'guilhermeht.ramos@gmail.com',
-    //         userPhone: '15981376104',
-    //         prayerRequest,
-    //       },
-    //     },
-    //   },
-    // });
+      const res = await PrayerRequest.createPrayerRequest(
+        user?.id,
+        prayerRequest,
+      );
 
-    setPrayerRequest('');
+      if (res.status) {
+        setPrayerRequest('');
 
-    Toast.show({
-      title: 'Seu pedido foi enviado',
-      text: 'Estaremos em oração por você.',
-      color: '#2ecc71',
-    });
-  }, []);
+        Toast.show({
+          title: 'Seu pedido foi enviado',
+          text: 'Estaremos em oração por você.',
+          color: '#2ecc71',
+        });
+      } else {
+        Alert.alert('Ocorreu um erro', res.message, [
+          { text: 'Tentar novamente', onPress: () => null },
+        ]);
+      }
+    };
+
+    createPrayerRequest();
+  }, [prayerRequest, user?.id]);
 
   return (
     <Default

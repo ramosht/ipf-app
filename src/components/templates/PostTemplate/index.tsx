@@ -28,7 +28,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
     <S.HeaderWrapper>
       <S.HeaderBrackground
         source={{
-          uri: `http://localhost:1337${thumbnail}`,
+          uri: thumbnail,
         }}
       />
       <Header type="page" title={title} goBack />

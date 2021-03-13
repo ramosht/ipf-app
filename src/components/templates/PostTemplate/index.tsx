@@ -42,7 +42,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
           }}
         >
           <Text
-            fontSize={20}
+            fontSize={24}
             style={{ textAlign: 'center', alignSelf: 'center' }}
             weight="Bold"
             color={theme.colors.midGrey}
@@ -81,6 +81,18 @@ const htmlStyle = {
     marginBottom: 8,
     color: theme.colors.midGrey,
     fontSize: 16,
+  },
+  h1: {
+    color: theme.colors.midGrey,
+    fontSize: 22,
+  },
+  h2: {
+    color: theme.colors.midGrey,
+    fontSize: 20,
+  },
+  h3: {
+    color: theme.colors.midGrey,
+    fontSize: 18,
   },
 };
 

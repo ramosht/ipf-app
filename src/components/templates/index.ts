@@ -1,7 +1,6 @@
-// import your molecule components here
 import Default from './Default';
 import PostTemplate from './PostTemplate';
 import AuthenticationTemplate from './Authentication';
+import ArticlesFeed from './ArticlesFeed';
 
-// export it here
-export { Default, PostTemplate, AuthenticationTemplate };
+export { Default, PostTemplate, AuthenticationTemplate, ArticlesFeed };

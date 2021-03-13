@@ -20,15 +20,15 @@ export const HeaderDescriptionWrapper = styled.View`
   justify-content: center;
 `;
 
-export const HeaderBackground = styled.ImageBackground`
+export const HeaderBackground = styled.Image`
   position: absolute;
-  bottom: 0;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
 `;
 
-export const Wrapper = styled.View`
+export const Wrapper = styled.View<WrapperProps>`
   flex: 1;
   background-color: ${theme.colors.white};
 `;

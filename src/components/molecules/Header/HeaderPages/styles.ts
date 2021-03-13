@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
 
-import { theme } from '@styles/Theme';
-
 type HeaderProps = {
   hasDescription?: boolean;
 };

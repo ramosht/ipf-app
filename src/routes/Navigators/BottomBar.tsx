@@ -7,13 +7,13 @@ import { Image } from 'react-native';
 
 import Home from '@components/pages/Home';
 import Devotional from '@components/pages/Devotional';
-import Media from '@components/pages/Media';
+import News from '@components/pages/News';
 import More from '@components/pages/More';
 import Schedule from '@components/pages/Schedule';
 
 // Icons
-import media from '../../assets/icons/media-inactive.png';
-import mediaActive from '../../assets/icons/media-active.png';
+import news from '../../assets/icons/news-inactive.png';
+import newsActive from '../../assets/icons/news-active.png';
 import devotional from '../../assets/icons/devotional-inactive.png';
 import devotionalActive from '../../assets/icons/devotional-active.png';
 import home from '../../assets/icons/home-inactive.png';
@@ -30,11 +30,11 @@ const BottomBar: React.FC = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
-          if (route.name === 'Mídia') {
+          if (route.name === 'Notícias') {
             return (
               <Image
                 resizeMode="contain"
-                source={focused ? mediaActive : media}
+                source={focused ? newsActive : news}
               />
             );
           }
@@ -90,7 +90,7 @@ const BottomBar: React.FC = () => {
       }}
     >
       <Tab.Screen name="Início" component={Home} />
-      <Tab.Screen name="Mídia" component={Media} />
+      <Tab.Screen name="Notícias" component={News} />
       <Tab.Screen name="Devocional" component={Devotional} />
       <Tab.Screen name="Agenda" component={Schedule} />
       <Tab.Screen name="Mais" component={More} />

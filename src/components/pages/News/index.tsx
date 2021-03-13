@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-
-import { ArticlesFeed, Default } from '@templates/index';
-import { DevotionalPostList } from '@organisms/index';
-import { Text } from '@components/typography';
-// import { SearchField, FilterPosts } from '@components/molecules';
+import React, { useEffect, useState } from 'react';
 import ArticlesService from '@services/articles';
+import { ArticlesFeed, Default } from '@templates/index';
+import { Headline, PostNews } from '@components/molecules';
+import { Text } from '@components/typography';
 import { Alert } from 'react-native';
-import { Loading } from '@components/atoms';
 import { useLoading } from '../../../contexts/loading/loading.context';
 
 type PostPreviewProps = {
@@ -18,24 +15,21 @@ type PostPreviewProps = {
   data: Date;
 };
 
-const Devotional: React.FC = () => {
-  const [posts, setPosts] = useState<Array<PostPreviewProps>>([]);
-  // const [categories, setCategories] = useState<Array<string>>([]);
-  // const [filter, setFilter] = useState<string>('Todos');
-  // const [search, setSearch] = useState<string>('');
-  const { loading, setLoading } = useLoading();
+const News: React.FC = () => {
+  const [news, setNews] = useState([]);
+  const { setLoading } = useLoading();
 
   useEffect(() => {
     const getArticles = async () => {
       setLoading(true);
-      const res = await ArticlesService.getArticles('devotional');
+      const res = await ArticlesService.getArticles('news');
 
       if (res?.articles) {
         setLoading(false);
-        const postsSanitized: PostPreviewProps[] = [];
+        const articlesSanitized: PostPreviewProps[] = [];
 
         res.articles.map((article: any) =>
-          postsSanitized.push({
+          articlesSanitized.push({
             category: article.category.title,
             description: article.description,
             id: article.id,
@@ -45,7 +39,7 @@ const Devotional: React.FC = () => {
           })
         );
 
-        setPosts(postsSanitized);
+        setNews(articlesSanitized);
       } else {
         setLoading(false);
         Alert.alert('Ocorreu um erro', res.message, [
@@ -58,15 +52,12 @@ const Devotional: React.FC = () => {
   }, [setLoading]);
 
   return (
-    <>
-      {loading && <Loading />}
-      <ArticlesFeed
-        title="Devocional"
-        description="Artigos, estudos, notícias e devocionais"
-        articles={posts}
-      />
-    </>
+    <ArticlesFeed
+      title="Notícias"
+      description="Fique por dentro de tudo o que acontece em nossa igreja"
+      articles={news}
+    />
   );
 };
 
-export default Devotional;
+export default News;

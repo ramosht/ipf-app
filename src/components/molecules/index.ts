@@ -12,6 +12,8 @@ import Logout from './Logout';
 import EditProfilePicture from './EditProfilePicture';
 import Notification from './Notification';
 import CardHome from './CardHome';
+import Headline from './Headline';
+import PostNews from './PostNews';
 
 // export it here
 export {
@@ -28,4 +30,6 @@ export {
   EditProfilePicture,
   Notification,
   CardHome,
+  Headline,
+  PostNews,
 };

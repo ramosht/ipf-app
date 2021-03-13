@@ -11,9 +11,9 @@ type GetArticleByIdResponse = {
 };
 
 class Articles {
-  async getArticles(): Promise<GetArticlesResponse> {
+  async getArticles(type: string): Promise<GetArticlesResponse> {
     try {
-      const { data } = await api.get('articles');
+      const { data } = await api.get(`/articles/all/${type}`);
       return { articles: data.articles };
     } catch (err) {
       return {

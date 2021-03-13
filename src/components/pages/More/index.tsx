@@ -1,24 +1,21 @@
-import React, { useContext, useState } from 'react';
-import { ThemeContext } from 'styled-components';
-import { ThemeProps } from '@styles/Theme';
+import React, { useState } from 'react';
 
 import { Default } from '@templates/index';
-import { Text } from '@typography/index';
 import { Logout, MoreItem } from '@components/molecules';
 
 const More: React.FC = () => {
   const [pages] = useState([
     {
       label: 'A igreja',
-      path: 'Igreja',
+      path: 'AboutUs',
     },
     {
       label: 'Nossas redes',
-      path: 'Ministerios',
+      path: 'Ministries',
     },
     {
       label: 'Nossos projetos',
-      path: 'Projetos',
+      path: 'Projects',
     },
     {
       label: 'Pedidos de oração',
@@ -26,7 +23,7 @@ const More: React.FC = () => {
     },
     {
       label: 'Contribuição',
-      path: 'Contribuicao',
+      path: 'Contribution',
     },
   ]);
 

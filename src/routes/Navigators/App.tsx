@@ -24,7 +24,7 @@ const App: React.FC = () => {
   return (
     <NotificationsProvider>
       <Stack.Navigator screenOptions={screenOptions}>
-        <Stack.Screen name="Media" component={BottomBar} />
+        <Stack.Screen name="News" component={BottomBar} />
         <Stack.Screen name="Devotional" component={BottomBar} />
         <Stack.Screen name="Home" component={BottomBar} />
         <Stack.Screen name="Schedule" component={BottomBar} />

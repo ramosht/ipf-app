@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { PostTemplate } from '@templates/index';
 import { useRoute, useNavigation } from '@react-navigation/native';
@@ -29,7 +29,7 @@ const Post: React.FC = () => {
     } catch (err) {
       navigation.goBack();
     }
-  }, []);
+  }, [navigation, route.params?.postId]);
 
   useEffect(() => {
     const getArticle = async () => {
@@ -52,8 +52,10 @@ const Post: React.FC = () => {
       }
     };
 
-    getArticle();
-  }, [postId]);
+    if (postId) {
+      getArticle();
+    }
+  }, [postId, navigation, setLoading]);
 
   return (
     <>

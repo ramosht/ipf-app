@@ -19,8 +19,7 @@ export const Body = styled(Text)`
 
 export const SeeMore = styled(Text)`
   text-align: center;
-  font-size: 18px;
-  color: ${theme.colors.secondary};
+  font-size: 15px;
   border-bottom-width: 1.5px;
   border-color: ${theme.colors.secondary};
   padding-bottom: 4px;

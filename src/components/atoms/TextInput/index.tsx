@@ -26,10 +26,11 @@ const TextInput: React.FC<TextInputInterface> = ({
     <S.Wrapper style={wrapperStyle} editable={editable}>
       <S.TextInputComponent
         value={value}
-        onChangeText={text => setValue(text)}
+        onChangeText={(text) => setValue(text)}
         style={inputStyle}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.lightGrey}
+        editable={editable}
         {...props}
       />
     </S.Wrapper>

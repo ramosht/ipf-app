@@ -1,10 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
-import { Loading } from '@components/atoms';
+import { Button, Loading } from '@components/atoms';
 import { Default } from '@components/templates';
 import { uri } from '@config/api';
 import { useNavigation, useRoute } from '@react-navigation/core';
+import theme from '@styles/Theme';
 import React from 'react';
-import { Alert, Linking } from 'react-native';
+import { Alert, Linking, View } from 'react-native';
 import { Image } from 'react-native-animatable';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as S from './styles';
@@ -74,12 +75,15 @@ const Ministry: React.FC = () => {
             source={{ uri: uri + data.ministry.thumbnail.url }}
           />
           <S.Body weight="Medium">{data.ministry.description}</S.Body>
-          <TouchableOpacity
-            onPress={() => verifyAccessWebsite()}
+
+          <Button
+            actionOnPress={() => verifyAccessWebsite()}
             style={{ marginTop: 16, alignItems: 'center' }}
           >
-            <S.SeeMore weight="Medium">Ver mais informações</S.SeeMore>
-          </TouchableOpacity>
+            <S.SeeMore color={theme.colors.white} weight="Medium">
+              Ver mais informações
+            </S.SeeMore>
+          </Button>
         </S.Wrapper>
       )}
     </Default>

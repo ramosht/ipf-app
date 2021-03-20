@@ -1,13 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
-import { Loading } from '@components/atoms';
+import { Button, Loading } from '@components/atoms';
 import { Default } from '@components/templates';
 import { uri } from '@config/api';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import theme from '@styles/Theme';
 import React from 'react';
-import { Alert, Linking } from 'react-native';
+import { Alert, Linking, View } from 'react-native';
 import { Image } from 'react-native-animatable';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import * as S from './styles';
 
 const QUERY = gql`
@@ -87,14 +87,16 @@ const Project: React.FC = () => {
                 marginTop: 15,
               },
             }}
-            source={{ html: data.project.description }}
+            source={{
+              html: data.project.description + data.project.description,
+            }}
           />
-          <TouchableOpacity
-            onPress={() => verifyAccessWebsite()}
+          <Button
+            actionOnPress={() => verifyAccessWebsite()}
             style={{ marginTop: 16, alignItems: 'center' }}
           >
             <S.SeeMore weight="Medium">Ver mais informações</S.SeeMore>
-          </TouchableOpacity>
+          </Button>
         </S.Wrapper>
       )}
     </Default>

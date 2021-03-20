@@ -3,7 +3,7 @@ import theme from '@styles/Theme';
 import HTML from 'react-native-render-html';
 import styled from 'styled-components/native';
 
-export const Wrapper = styled.ScrollView``;
+export const Wrapper = styled.View``;
 
 export const Title = styled(Text)`
   text-align: center;
@@ -20,8 +20,8 @@ export const Body = styled(HTML)`
 
 export const SeeMore = styled(Text)`
   text-align: center;
-  font-size: 18px;
-  color: ${theme.colors.secondary};
+  font-size: 15px;
+  color: ${theme.colors.white};
   border-bottom-width: 1.5px;
   border-color: ${theme.colors.secondary};
   padding-bottom: 4px;

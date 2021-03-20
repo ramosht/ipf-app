@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
 import * as S from './styles';
 import { useUser } from '../../../contexts/user/user.context';
+import BlankAvatar from '../../../assets/images/blank-avatar.jpeg';
 
 type ProfilePictureProps = {
   style?: React.CSSProperties;
@@ -19,7 +20,7 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({ style }) => {
       style={{ ...style }}
     >
       {user?.image === '' ? (
-        <View />
+        <S.Picture source={BlankAvatar} />
       ) : (
         <S.Picture
           source={{

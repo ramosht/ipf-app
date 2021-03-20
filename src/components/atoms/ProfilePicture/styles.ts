@@ -14,3 +14,10 @@ export const Picture = styled.Image`
   height: 100%;
   border-radius: 48px;
 `;
+
+export const PicturePlaceholder = styled.View`
+  width: 100%;
+  height: 100%;
+  border-radius: 48px;
+  background: red;
+`;

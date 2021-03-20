@@ -41,7 +41,9 @@ const Login: React.FC = () => {
 
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('ConfirmCode', { type: 'signup', email })
+          navigation.navigate('Username', {
+            email,
+          })
         }
         style={{ marginTop: 12, alignSelf: 'center' }}
         disabled={buttonDisabled}

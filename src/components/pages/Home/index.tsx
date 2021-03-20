@@ -1,23 +1,94 @@
 import React, { useEffect } from 'react';
 
 import { Default } from '@templates/index';
+import { HomeSliderItem, ShortcutsHome } from '@components/organisms';
+import { Alert, View } from 'react-native';
+import { gql, useQuery } from '@apollo/client';
+import { Loading } from '@components/atoms';
+import Carousel from 'react-native-snap-carousel';
+import { SLIDER_WIDTH } from '@components/organisms/HomeSliderItem';
+import api, { uri } from '@config/api';
+import { useRoute } from '@react-navigation/core';
+import AsyncStorage from '@react-native-community/async-storage';
+import { Text } from '@components/typography';
 import axios from 'axios';
-import { ShortcutsHome } from '@components/organisms';
-import { Image, View } from 'react-native';
+import { useLoading } from '../../../contexts/loading/loading.context';
+import { useAuthentication } from '../../../contexts/authentication/authentication.context';
+import { useUser } from '../../../contexts/user/user.context';
+
+const QUERY_POSTS = gql`
+  query {
+    articles(limit: 5, sort: "created_at:DESC") {
+      title
+      description
+      thumbnail {
+        url
+        alternativeText
+      }
+      created_at
+      id
+      category
+    }
+  }
+`;
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    const verifyStatus = async () => {
-      try {
-        const { data } = await axios.get('http://127.0.0.1:3333/status');
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const carouselRef = React.useRef(null);
+  const { user, setUser } = useUser();
+  const { handleLogout } = useAuthentication();
+  const { loading, setLoading } = useLoading();
 
-    verifyStatus();
+  useEffect(() => {
+    setLoading(true);
+
+    AsyncStorage.getItem('@IPF:authenticatedUser')
+      .then((res) => {
+        const authenticatedUser = JSON.parse(res);
+
+        axios
+          .get(`${uri}/users/${authenticatedUser.id}`)
+          .then((res) => {
+            setLoading(false);
+            setUser({
+              id: res.data.id,
+              username: res.data.username,
+              email: res.data.email,
+              phoneNumber: res.data.phone,
+              image: res.data.profilePicture
+                ? uri + res.data.profilePicture.url
+                : '',
+              birthday: res.data.birthday,
+            });
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.log(err);
+          });
+      })
+      .catch(() => {
+        Alert.alert(
+          'Ocorreu um erro',
+          'Será necessário realizar o login novamente.',
+          [{ text: 'Tudo bem', onPress: () => handleLogout() }]
+        );
+      });
   }, []);
+
+  const {
+    data: dataPosts,
+    loading: loadingPosts,
+    error: errorPosts,
+  } = useQuery(QUERY_POSTS);
+
+  if (loadingPosts || loading) {
+    return <Loading />;
+  }
+
+  if (errorPosts) {
+    Alert.alert('Ocorreu um erro', 'Não foi possível obter textos', [
+      { text: 'Tudo bem', onPress: () => null },
+    ]);
+  }
 
   return (
     <Default
@@ -26,13 +97,17 @@ const Home: React.FC = () => {
       bodyStyle={{ flex: 1, padding: 0 }}
     >
       <View style={{ flex: 1 }}>
-        <Image
-          style={{ width: '100%', height: '100%' }}
-          source={{
-            uri:
-              'https://instagram.fsod2-1.fna.fbcdn.net/v/t51.2885-15/e35/s1080x1080/139960312_225790662427449_8670610022925752031_n.jpg?_nc_ht=instagram.fsod2-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=_H9HfmAiLgQAX9jI4vc&tp=1&oh=b583c91f85ff89b744dd864c78c669f7&oe=603F6463',
-          }}
-        />
+        {dataPosts && (
+          <Carousel
+            ref={carouselRef}
+            data={dataPosts.articles}
+            renderItem={(post: any) => <HomeSliderItem post={post.item} />}
+            windowSize={100}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={SLIDER_WIDTH}
+            layout="tinder"
+          />
+        )}
       </View>
       <View>
         <ShortcutsHome />

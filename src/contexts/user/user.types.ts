@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
 export type User = {
-  id: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
-  image: string;
-  birthday: string;
+  id?: string | number;
+  username?: string;
+  email?: string;
+  phoneNumber?: string;
+  image?: string;
+  birthday?: string;
 } | null;
 
 export type UserProviderProps = {
@@ -14,6 +14,6 @@ export type UserProviderProps = {
 };
 
 export type UserStateProps = {
-  user: User;
+  user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User>>;
 };

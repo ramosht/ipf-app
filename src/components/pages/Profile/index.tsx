@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Moment from 'moment';
 import { telephoneMask } from 'js-essentials-functions';
 
 import { Default } from '@templates/index';
-import { Text } from '@typography/index';
-import { EditProfilePicture, Logout, MoreItem } from '@components/molecules';
+import { EditProfilePicture } from '@components/molecules';
 import { Button, TextInput } from '@components/atoms';
 import { View } from 'react-native';
 import { useUser } from '../../../contexts/user/user.context';
@@ -36,6 +35,7 @@ const More: React.FC = () => {
             placeholder="Email"
             value={email}
             setValue={setEmail}
+            editable={false}
           />
           <TextInput
             wrapperStyle={{ marginBottom: 16 }}

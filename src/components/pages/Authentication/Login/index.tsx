@@ -4,20 +4,14 @@ import { AuthenticationTemplate } from '@templates';
 import { TextInput } from '@atoms/index';
 import { useNavigation } from '@react-navigation/native';
 import { emailValidation } from 'js-essentials-functions';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text } from '@components/typography';
+import theme from '@styles/Theme';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-
-  const handleLogin = useCallback(() => {
-    const asyncHandleLogin = async () => {
-      navigation.navigate('Password');
-      // navigation.navigate('ConfirmCode', { type: 'signup' });
-    };
-
-    asyncHandleLogin();
-  }, [navigation]);
 
   useEffect(() => {
     if (emailValidation(email)) {
@@ -29,7 +23,7 @@ const Login: React.FC = () => {
 
   return (
     <AuthenticationTemplate
-      actionOnPress={handleLogin}
+      actionOnPress={() => navigation.navigate('Password', { email })}
       buttonDisabled={buttonDisabled}
       title="Seja bem-vindo(a)"
       description="ao aplicativo da Igreja Presbiteriana da Filadélfia. Para entrar, insira seu e-mail abaixo."
@@ -44,6 +38,27 @@ const Login: React.FC = () => {
         autoCompleteType="email"
         autoCapitalize="none"
       />
+
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('ConfirmCode', { type: 'signup', email })
+        }
+        style={{ marginTop: 12, alignSelf: 'center' }}
+        disabled={buttonDisabled}
+      >
+        <Text
+          weight="Medium"
+          fontSize={15}
+          color={
+            buttonDisabled
+              ? `${theme.colors.secondary}90`
+              : theme.colors.secondary
+          }
+          style={{ borderBottomWidth: 1, borderColor: theme.colors.secondary }}
+        >
+          Criar conta
+        </Text>
+      </TouchableOpacity>
     </AuthenticationTemplate>
   );
 };

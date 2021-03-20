@@ -33,6 +33,7 @@ const Panel: React.FC<PanelProps> = ({
         {title && (
           <Text
             fontSize={20}
+            weight="Medium"
             color={theme.colors.lightGrey}
             style={{ marginBottom: 8 }}
           >
@@ -42,7 +43,8 @@ const Panel: React.FC<PanelProps> = ({
 
         {description && (
           <Text
-            fontSize={15}
+            fontSize={16}
+            weight="Medium"
             color={theme.colors.lightGrey}
             style={{ marginBottom: 24 }}
           >

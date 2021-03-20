@@ -3,7 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import AboutUs from '@pages/Igreja';
 import Ministries from '@components/pages/Ministries';
+import Ministry from '@components/pages/Ministry';
 import Projects from '@pages/Projects';
+import Project from '@pages/Project';
 import PrayerRequests from '@components/pages/PrayerRequests';
 import Contribution from '@components/pages/Contribution';
 import Post from '@pages/Post';
@@ -32,7 +34,9 @@ const App: React.FC = () => {
 
         <Stack.Screen name="AboutUs" component={AboutUs} />
         <Stack.Screen name="Ministries" component={Ministries} />
+        <Stack.Screen name="Ministry" component={Ministry} />
         <Stack.Screen name="Projects" component={Projects} />
+        <Stack.Screen name="Project" component={Project} />
         <Stack.Screen name="PrayerRequests" component={PrayerRequests} />
         <Stack.Screen name="Contribution" component={Contribution} />
         <Stack.Screen name="Profile" component={Profile} />

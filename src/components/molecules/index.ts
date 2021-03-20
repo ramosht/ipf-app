@@ -14,6 +14,8 @@ import Notification from './Notification';
 import CardHome from './CardHome';
 import Headline from './Headline';
 import PostNews from './PostNews';
+import CarouselIndicator from './CarouselIndicator';
+import ProjectThumb from './ProjectThumb';
 
 // export it here
 export {
@@ -32,4 +34,6 @@ export {
   CardHome,
   Headline,
   PostNews,
+  CarouselIndicator,
+  ProjectThumb,
 };

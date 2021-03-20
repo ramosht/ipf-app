@@ -80,7 +80,7 @@ const htmlStyle = {
     marginTop: 8,
     marginBottom: 8,
     color: theme.colors.midGrey,
-    fontSize: 16,
+    fontSize: 28,
   },
   h1: {
     color: theme.colors.midGrey,

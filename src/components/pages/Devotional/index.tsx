@@ -1,69 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { ArticlesFeed, Default } from '@templates/index';
-import { DevotionalPostList } from '@organisms/index';
-import { Text } from '@components/typography';
-// import { SearchField, FilterPosts } from '@components/molecules';
-import ArticlesService from '@services/articles';
+import { ArticlesFeed } from '@templates/index';
 import { Alert } from 'react-native';
 import { Loading } from '@components/atoms';
-import { useLoading } from '../../../contexts/loading/loading.context';
+import { gql, useQuery } from '@apollo/client';
 
-type PostPreviewProps = {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  thumbnail: string;
-  data: Date;
-};
+const BANK_ACCOUNTS_QUERY = gql`
+  query {
+    articles(where: { category: "devotional" }) {
+      title
+      description
+      thumbnail {
+        url
+        alternativeText
+      }
+      created_at
+      id
+      category
+    }
+  }
+`;
 
 const Devotional: React.FC = () => {
-  const [posts, setPosts] = useState<Array<PostPreviewProps>>([]);
-  // const [categories, setCategories] = useState<Array<string>>([]);
-  // const [filter, setFilter] = useState<string>('Todos');
-  // const [search, setSearch] = useState<string>('');
-  const { loading, setLoading } = useLoading();
+  const { data, loading: loadingGraphql, error } = useQuery(
+    BANK_ACCOUNTS_QUERY
+  );
 
-  useEffect(() => {
-    const getArticles = async () => {
-      setLoading(true);
-      const res = await ArticlesService.getArticles('devotional');
+  if (loadingGraphql) {
+    return <Loading />;
+  }
 
-      if (res?.articles) {
-        setLoading(false);
-        const postsSanitized: PostPreviewProps[] = [];
-
-        res.articles.map((article: any) =>
-          postsSanitized.push({
-            category: article.category.title,
-            description: article.description,
-            id: article.id,
-            thumbnail: article.thumbnail,
-            title: article.title,
-            data: new Date(article.createdAt),
-          })
-        );
-
-        setPosts(postsSanitized);
-      } else {
-        setLoading(false);
-        Alert.alert('Ocorreu um erro', res.message, [
-          { text: 'Tudo bem', onPress: () => null },
-        ]);
-      }
-    };
-
-    getArticles();
-  }, [setLoading]);
+  if (!data) {
+    Alert.alert(
+      'Ocorreu um erro',
+      'Não foi possível obter a lista de devocionais',
+      [{ text: 'Tudo bem', onPress: () => null }]
+    );
+  }
 
   return (
     <>
-      {loading && <Loading />}
+      {loadingGraphql && <Loading />}
       <ArticlesFeed
         title="Devocional"
         description="Artigos, estudos, notícias e devocionais"
-        articles={posts}
+        articles={data ? data.articles : []}
       />
     </>
   );

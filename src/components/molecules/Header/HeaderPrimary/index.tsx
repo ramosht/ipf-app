@@ -8,7 +8,7 @@ const HeaderPrimary: React.FC = () => {
     <S.Header>
       <Logo />
       <S.HeaderButtons>
-        <Notification hasNotification />
+        {/* <Notification hasNotification /> */}
         <ProfilePicture style={{ marginLeft: 14 }} />
       </S.HeaderButtons>
     </S.Header>

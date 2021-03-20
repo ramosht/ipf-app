@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import theme from '@styles/Theme';
-import ContributionServices from '@services/contribution';
-
+import { gql, useQuery } from '@apollo/client';
 import { Default } from '@components/templates';
 import { Text } from '@components/typography';
 
@@ -9,45 +8,37 @@ import { BankAccount, ContributionVerse } from '@components/molecules';
 import { Alert } from 'react-native';
 import { Loading } from '@components/atoms';
 import * as S from './styles';
-import { useLoading } from '../../../contexts/loading/loading.context';
 
 type ContribuicaoProps = {
   children?: React.ReactNode;
 };
 
-type BankAccount = {
-  id: string;
-  bank: string;
-  agency: string;
-  account: string;
-};
+const QUERY = gql`
+  query {
+    bankAccounts {
+      id
+      bank
+      agency
+      account
+    }
+  }
+`;
 
 const Contribuicao: React.FC<ContribuicaoProps> = ({ children }) => {
-  const [bankAccounts, setBankAccounts] = useState<Array<BankAccount>>([]);
-  const { setLoading, loading } = useLoading();
+  const { data, loading: loadingGraphql, error } = useQuery(QUERY);
 
-  useEffect(() => {
-    const getBankAccounts = async () => {
-      setLoading(true);
-      const res = await ContributionServices.getContributions();
+  if (loadingGraphql) {
+    return <Loading />;
+  }
 
-      if (res.bankAccounts) {
-        setLoading(false);
-        setBankAccounts(res.bankAccounts);
-      } else {
-        setLoading(false);
-        Alert.alert('Ocorreu um erro', res.message, [
-          { text: 'Tudo bem', onPress: () => null },
-        ]);
-      }
-    };
-
-    getBankAccounts();
-  }, []);
+  if (!data || error) {
+    Alert.alert('Ocorreu um erro', 'Não foi possível obter contas bancárias.', [
+      { text: 'Tudo bem', onPress: () => null },
+    ]);
+  }
 
   return (
     <>
-      {loading && <Loading />}
       <Default
         description="Dízimos e ofertas"
         header={{ type: 'page', title: 'Contribuição', goBack: true }}
@@ -75,14 +66,15 @@ const Contribuicao: React.FC<ContribuicaoProps> = ({ children }) => {
           </Text>
         </S.ChurchInfo>
 
-        {bankAccounts.map((account: any) => (
-          <BankAccount
-            key={account.id}
-            account={account.account}
-            bank={account.bank}
-            agency={account.agency}
-          />
-        ))}
+        {data &&
+          data.bankAccounts.map((account: any) => (
+            <BankAccount
+              key={account.id}
+              account={account.account}
+              bank={account.bank}
+              agency={account.agency}
+            />
+          ))}
       </Default>
     </>
   );

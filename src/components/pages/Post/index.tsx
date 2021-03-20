@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { PostTemplate } from '@templates/index';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import ArticleService from '@services/articles';
-import { Alert } from 'react-native';
+import { Alert, View } from 'react-native';
 import { Loading } from '@components/atoms';
-import { useLoading } from '../../../contexts/loading/loading.context';
+import { gql, useQuery } from '@apollo/client';
+import { uri } from '@config/api';
 
 type PostProps = {
   title: string;
@@ -14,59 +14,51 @@ type PostProps = {
   body: string;
 };
 
+const GET_ARTICLE_BY_ID = gql`
+  query GET_ARTICLE_BY_ID($postId: ID!) {
+    article(id: $postId) {
+      id
+      title
+      description
+      body
+      thumbnail {
+        url
+        alternativeText
+      }
+      category
+    }
+  }
+`;
+
 const Post: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { loading, setLoading } = useLoading();
 
-  const [post, setPost] = useState<PostProps | null>(null);
-  const [postId, setPostId] = useState<string | null>(null);
+  const { data, loading: loadingGraphql, error } = useQuery(GET_ARTICLE_BY_ID, {
+    variables: {
+      postId: route.params?.postId,
+    },
+  });
 
-  useEffect(() => {
-    try {
-      const id = route.params?.postId;
-      setPostId(id);
-    } catch (err) {
-      navigation.goBack();
-    }
-  }, [navigation, route.params?.postId]);
+  if (loadingGraphql) {
+    return <Loading />;
+  }
 
-  useEffect(() => {
-    const getArticle = async () => {
-      setLoading(true);
-      const res = await ArticleService.getArticleById(postId);
-
-      if (res.article) {
-        setLoading(false);
-        setPost({
-          body: res.article.body,
-          title: res.article.title,
-          description: res.article.description,
-          thumbnail: res.article.thumbnail,
-        });
-      } else {
-        setLoading(false);
-        Alert.alert('Ocorreu um erro', res.message, [
-          { text: 'Voltar', onPress: () => navigation.goBack() },
-        ]);
-      }
-    };
-
-    if (postId) {
-      getArticle();
-    }
-  }, [postId, navigation, setLoading]);
+  if (!data || error) {
+    Alert.alert('Ocorreu um erro', 'Não foi possível obter os dados do texto', [
+      { text: 'Tudo bem', onPress: () => navigation.goBack() },
+    ]);
+  }
 
   return (
     <>
-      {loading && <Loading />}
-      {post && (
+      {data && (
         <PostTemplate
           title="Devocional"
-          thumbnail={post.thumbnail}
-          description={post.description}
-          html={post.body}
-          htmlTitle={post.title}
+          thumbnail={uri + data.article.thumbnail.url}
+          description={data.article.description}
+          html={data.article.body}
+          htmlTitle={data.article.title}
         />
       )}
     </>

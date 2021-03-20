@@ -1,4 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useState } from 'react';
+import { useUser } from '../user/user.context';
 import {
   AuthenticationProviderProps,
   AuthenticationStateProps,
@@ -6,19 +8,30 @@ import {
 
 const AuthenticationContext = React.createContext<AuthenticationStateProps>({
   userIsAuthenticated: false,
-  setUserIsAuthenticated: () => { },
+  setUserIsAuthenticated: () => {},
 });
 
 const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
   children,
 }) => {
+  const { setUser } = useUser();
+
   const [userIsAuthenticated, setUserIsAuthenticated] = useState<boolean>(
-    false,
+    false
   );
+
+  const handleLogout = () => {
+    setUser(null);
+    setUserIsAuthenticated(false);
+    setUserIsAuthenticated(false);
+    AsyncStorage.removeItem('@IPF:token');
+    AsyncStorage.removeItem('@IPF:userIsAuthenticated');
+  };
 
   const value: AuthenticationStateProps = {
     userIsAuthenticated,
     setUserIsAuthenticated,
+    handleLogout,
   };
 
   return (

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Default } from '@templates/index';
 import { Headline, PostNews } from '@components/molecules';
 import { Text } from '@components/typography';
+import { uri } from '../../../config/api';
 
 type Article = {
   title: string;
   description: string;
-  thumbnail: string;
+  thumbnail: {
+    url: string;
+    alternativeText: string;
+  };
   data: Date;
   id: string;
   style?: Object;
@@ -30,7 +34,6 @@ const ArticlesFeed: React.FC<TemplateProps> = ({
       header={{ title, type: 'page', goBack: false }}
       description={description}
     >
-      {articles.map((article) => console.log(article.id))}
       {articles.length > 0 ? (
         articles.map((article, index) =>
           index === 0 ? (
@@ -38,7 +41,7 @@ const ArticlesFeed: React.FC<TemplateProps> = ({
               key={article.id}
               title={article.title}
               description={article.description}
-              thumbnail={article.thumbnail}
+              thumbnail={`${uri}${article.thumbnail.url}`}
               data={article.data}
               id={article.id}
               style={{ marginBottom: 8, elevation: 10 }}
@@ -49,7 +52,7 @@ const ArticlesFeed: React.FC<TemplateProps> = ({
             <PostNews
               key={article.id}
               title={article.title}
-              thumbnail={article.thumbnail}
+              thumbnail={`${uri}${article.thumbnail.url}`}
               data={article.data}
               id={article.id}
               style={{ marginTop: 16 }}

@@ -46,6 +46,7 @@
     "react/jsx-curly-newline": "off",
     "class-methods-use-this": "off",
     "react/jsx-indent": "off",
+    "@typescript-eslint/explicit-module-boundary-types":"off",
     "import/extensions": [
       "error",
       "ignorePackages",

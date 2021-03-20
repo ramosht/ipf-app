@@ -1,33 +1,40 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { AuthenticationTemplate } from '@templates';
-import { PasswordInput } from '@atoms/index';
+import { Loading, PasswordInput, TextInput } from '@atoms/index';
 import { passwordRegex } from '@config/utils';
 import { Text } from '@components/typography';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { gql, useMutation } from '@apollo/client';
+import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUser } from '../../../../contexts/user/user.context';
 import { useAuthentication } from '../../../../contexts/authentication/authentication.context';
 import * as S from './styles';
+
+const MUTATION_LOGIN = gql`
+  mutation LOGIN($email: String!, $password: String!) {
+    login(input: { identifier: $email, password: $password }) {
+      jwt
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
 
 const Password: React.FC = () => {
   const navigation = useNavigation();
   const [password, setPassword] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const { setUserIsAuthenticated } = useAuthentication();
-  const { setUser } = useUser();
+  const { setUserIsAuthenticated, setToken } = useAuthentication();
+  const { setUser, user } = useUser();
+  const route = useRoute();
+  const [loginError, setLoginError] = useState('');
 
-  const handleLogin = useCallback(() => {
-    setUser({
-      id: '876405cb-7e11-4e79-b760-3639d3a4eb80',
-      username: 'Guilherme Ramos',
-      email: 'guilhermeht.ramos@gmail.com',
-      phoneNumber: '15981376104',
-      image:
-        'https://instagram.fsod2-1.fna.fbcdn.net/v/t51.2885-15/e35/134725762_401789460910085_5215578327472946775_n.jpg?_nc_ht=instagram.fsod2-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=Wx_XYCn8zmMAX-10jTW&tp=1&oh=2e555d26a01895fb7a4352f4caa095fe&oe=603AAA1E',
-      birthday: '1998-02-09',
-    });
-    setUserIsAuthenticated(true);
-  }, [setUserIsAuthenticated, setUser]);
+  const { email } = route.params;
 
   useEffect(() => {
     if (passwordRegex.test(password)) {
@@ -37,6 +44,48 @@ const Password: React.FC = () => {
     }
   }, [password]);
 
+  const [login, { loading: loadingLogin }] = useMutation(MUTATION_LOGIN);
+
+  const handleLogin = useCallback(() => {
+    login({ variables: { email, password } })
+      .then((res) => {
+        const { id } = res.data.login.user;
+        const { jwt } = res.data.login;
+
+        setUser({ ...user, id });
+        AsyncStorage.setItem('@IPF:authenticatedUser', JSON.stringify({ id }));
+        AsyncStorage.setItem('@IPF:token', jwt);
+        AsyncStorage.setItem('@IPF:userIsAuthenticated', 'true');
+        setUserIsAuthenticated(true);
+      })
+      .catch((error) => {
+        if (
+          error?.graphQLErrors[0] &&
+          error?.graphQLErrors[0].extensions.exception.code === 400
+        ) {
+          setLoginError('Senha incorreta');
+        } else {
+          Alert.alert(
+            'Ocorreu um erro',
+            'Não foi possível fazer login. Tente novamente mais tarde.',
+            [{ text: 'Tudo bem', onPress: () => navigation.goBack() }]
+          );
+        }
+      });
+  }, [
+    email,
+    login,
+    password,
+    navigation,
+    setUser,
+    setUserIsAuthenticated,
+    user,
+  ]);
+
+  if (loadingLogin) {
+    return <Loading />;
+  }
+
   return (
     <AuthenticationTemplate
       description="Agora, digite sua senha"
@@ -44,6 +93,13 @@ const Password: React.FC = () => {
       buttonDisabled={buttonDisabled}
       buttonText="Continuar"
     >
+      <TextInput
+        value={email}
+        editable={false}
+        wrapperStyle={{ width: '100%', marginBottom: 8 }}
+        setValue={() => null}
+      />
+
       <PasswordInput
         value={password}
         setValue={setPassword}
@@ -51,6 +107,12 @@ const Password: React.FC = () => {
         placeholder="Senha"
         autoFocus
       />
+
+      {loginError !== '' && (
+        <Text color="#F00" style={{ alignSelf: 'center', marginTop: 8 }}>
+          Senha incorreta
+        </Text>
+      )}
 
       <S.ForgotPassword onPress={() => navigation.navigate('RecoverPassword')}>
         <Text

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 import * as S from './styles';
 import { useUser } from '../../../contexts/user/user.context';
 
@@ -17,11 +18,15 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({ style }) => {
       onPress={() => navigation.navigate('Profile')}
       style={{ ...style }}
     >
-      <S.Picture
-        source={{
-          uri: user?.image,
-        }}
-      />
+      {user?.image === '' ? (
+        <View />
+      ) : (
+        <S.Picture
+          source={{
+            uri: user?.image,
+          }}
+        />
+      )}
     </S.PictureWrapper>
   );
 };

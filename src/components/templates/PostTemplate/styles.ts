@@ -22,8 +22,8 @@ export const HeaderBrackground = styled.ImageBackground`
 export const Body = styled.View`
   background-color: #fff;
   padding-horizontal: 30px;
-  border-top-right-radius: 55px;
-  border-top-left-radius: 55px;
+  border-top-right-radius: 35px;
+  border-top-left-radius: 35px;
   flex: 1;
   overflow: hidden;
 `;

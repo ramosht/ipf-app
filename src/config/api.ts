@@ -1,21 +1,10 @@
-import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const api = axios.create({
-  baseURL: 'http://127.0.0.1:3333',
+export const uri = 'http://192.168.0.7:1337';
+
+const client = new ApolloClient({
+  uri: `${uri}/graphql`,
+  cache: new InMemoryCache(),
 });
 
-api.interceptors.request.use(
-  async (config: any) => {
-    const token = await AsyncStorage.getItem('token');
-
-    config.headers.Authorization = token ? `Bearer ${token}` : null;
-
-    return config;
-  },
-  (error: any) => {
-    return Promise.reject(error);
-  },
-);
-
-export default api;
+export default client;

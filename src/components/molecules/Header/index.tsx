@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Text } from '@components/typography';
 import HeaderPrimary from './HeaderPrimary';
 import HeaderPages from './HeaderPages';
 

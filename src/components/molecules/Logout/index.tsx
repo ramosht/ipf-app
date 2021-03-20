@@ -4,18 +4,11 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useAuthentication } from '../../../contexts/authentication/authentication.context';
-import { useUser } from '../../../contexts/user/user.context';
 
 import * as S from './styles';
 
 const Logout: React.FC = () => {
-  const { setUser } = useUser();
-  const { setUserIsAuthenticated } = useAuthentication();
-
-  const handleLogout = useCallback(() => {
-    setUser(null);
-    setUserIsAuthenticated(false);
-  }, [setUser, setUserIsAuthenticated]);
+  const { handleLogout } = useAuthentication();
 
   const confirmLogout = useCallback(() => {
     Alert.alert(
@@ -24,7 +17,7 @@ const Logout: React.FC = () => {
       [
         { text: 'Sair', onPress: () => handleLogout() },
         { text: 'Cancelar', onPress: () => null },
-      ],
+      ]
     );
   }, [handleLogout]);
 

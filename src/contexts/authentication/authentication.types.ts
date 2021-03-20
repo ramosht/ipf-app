@@ -7,4 +7,5 @@ export type AuthenticationProviderProps = {
 export type AuthenticationStateProps = {
   userIsAuthenticated: boolean;
   setUserIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  handleLogout: () => void;
 };

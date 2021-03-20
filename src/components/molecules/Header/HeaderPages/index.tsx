@@ -39,7 +39,7 @@ const HeaderPages: React.FC<HeaderPages> = ({
         )}
       </S.TitleWrapper>
       <S.ButtonsWrapper>
-        <Notification color={theme.colors.white} />
+        {/* <Notification color={theme.colors.white} /> */}
         <ProfilePicture style={{ marginLeft: 14 }} />
       </S.ButtonsWrapper>
     </S.Header>

@@ -1,61 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import ArticlesService from '@services/articles';
-import { ArticlesFeed, Default } from '@templates/index';
-import { Headline, PostNews } from '@components/molecules';
-import { Text } from '@components/typography';
+import React from 'react';
+import { ArticlesFeed } from '@templates/index';
 import { Alert } from 'react-native';
-import { useLoading } from '../../../contexts/loading/loading.context';
+import { Loading } from '@components/atoms';
+import { gql, useQuery } from '@apollo/client';
 
-type PostPreviewProps = {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  thumbnail: string;
-  data: Date;
-};
+const BANK_ACCOUNTS_QUERY = gql`
+  query {
+    articles(where: { category: "news" }) {
+      title
+      description
+      thumbnail {
+        url
+        alternativeText
+      }
+      created_at
+      id
+      category
+    }
+  }
+`;
 
 const News: React.FC = () => {
-  const [news, setNews] = useState([]);
-  const { setLoading } = useLoading();
+  const { data, loading: loadingGraphql } = useQuery(BANK_ACCOUNTS_QUERY);
 
-  useEffect(() => {
-    const getArticles = async () => {
-      setLoading(true);
-      const res = await ArticlesService.getArticles('news');
+  if (loadingGraphql) {
+    return <Loading />;
+  }
 
-      if (res?.articles) {
-        setLoading(false);
-        const articlesSanitized: PostPreviewProps[] = [];
-
-        res.articles.map((article: any) =>
-          articlesSanitized.push({
-            category: article.category.title,
-            description: article.description,
-            id: article.id,
-            thumbnail: article.thumbnail,
-            title: article.title,
-            data: new Date(article.createdAt),
-          })
-        );
-
-        setNews(articlesSanitized);
-      } else {
-        setLoading(false);
-        Alert.alert('Ocorreu um erro', res.message, [
-          { text: 'Tudo bem', onPress: () => null },
-        ]);
-      }
-    };
-
-    getArticles();
-  }, [setLoading]);
+  if (!data) {
+    Alert.alert(
+      'Ocorreu um erro',
+      'Não foi possível obter a lista de devocionais',
+      [{ text: 'Tudo bem', onPress: () => null }]
+    );
+  }
 
   return (
     <ArticlesFeed
       title="Notícias"
       description="Fique por dentro de tudo o que acontece em nossa igreja"
-      articles={news}
+      articles={data ? data.articles : []}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { Default } from '@templates/index';
 import { Notification } from '@components/molecules';
@@ -9,23 +9,47 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from '@components/atoms';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useRoute } from '@react-navigation/core';
+import moment from 'moment';
 import { useNotifications } from '../../../contexts/notifications/notifications.context';
 
 import * as S from './styles';
 
 const More: React.FC = () => {
   const { notifications } = useNotifications();
+  const route = useRoute();
 
-  const confirmTurnOnAlarm = useCallback(() => {
-    Alert.alert(
-      'Ativar lembrete',
-      'Você tem certeza de que quer ativar um lembrete para o Culto de celetração (22/06)?',
-      [
-        { text: 'Cancelar', onPress: () => null },
-        { text: 'Confirmar', onPress: () => null },
-      ],
-    );
-  }, []);
+  const {
+    eventId,
+    title,
+    thumbnail,
+    location,
+    time,
+    type,
+    date,
+  } = route.params.event;
+  console.log(route.params);
+
+  // const confirmTurnOnAlarm = useCallback(() => {
+  //   Alert.alert(
+  //     'Ativar lembrete',
+  //     'Você tem certeza de que quer ativar um lembrete para o Culto de celetração (22/06)?',
+  //     [
+  //       { text: 'Cancelar', onPress: () => null },
+  //       { text: 'Confirmar', onPress: () => null },
+  //     ],
+  //   );
+  // }, []);
+
+  const translateKey = (key: string) => {
+    if (key === 'sunday') return 'Dom';
+    if (key === 'monday') return 'Seg';
+    if (key === 'tuesday') return 'Ter';
+    if (key === 'wednesday') return 'Qua';
+    if (key === 'thursday') return 'Qui';
+    if (key === 'thursday') return 'Sex';
+    if (key === 'saturday') return 'Sáb';
+  };
 
   return (
     <>
@@ -34,41 +58,57 @@ const More: React.FC = () => {
         header={{ type: 'page', title: 'Evento', goBack: true }}
       >
         <S.ThumbnailWrapper>
-          <S.Thumbnail
-            source={{
-              uri:
-                'https://instagram.fsod2-1.fna.fbcdn.net/v/t51.2885-15/e35/129719122_157176432816944_6695873766970843475_n.jpg?_nc_ht=instagram.fsod2-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=UGHUrzgynMsAX8quWxU&tp=1&oh=3b5845e43c1f893ec8cbaeecbfcdf5a6&oe=603E683A',
-            }}
-          />
+          {thumbnail && (
+            <S.Thumbnail
+              source={{
+                uri: thumbnail,
+              }}
+            />
+          )}
 
-          <S.TurnOnAlarm onPress={() => confirmTurnOnAlarm()}>
+          {/* <S.TurnOnAlarm onPress={() => confirmTurnOnAlarm()}>
             <MaterialCommunityIcons
               name="alarm"
               size={26}
               color={theme.colors.white}
             />
-          </S.TurnOnAlarm>
+          </S.TurnOnAlarm> */}
         </S.ThumbnailWrapper>
 
         <S.Wrapper>
           <S.Header>
             <S.Date style={{ elevation: 8 }}>
-              <Text
-                color={theme.colors.primary}
-                fontSize={16}
-                weight="Medium"
-                style={{ marginBottom: -4 }}
-              >
-                JUN
-              </Text>
-              <Text color={theme.colors.primary} fontSize={26} weight="Bold">
-                22
-              </Text>
+              {type === 'weekly' && date && (
+                <Text color={theme.colors.primary} fontSize={26} weight="Bold">
+                  {translateKey(date)}
+                </Text>
+              )}
+              {type === 'unique' && (
+                <>
+                  <Text
+                    color={theme.colors.primary}
+                    fontSize={16}
+                    weight="Medium"
+                    style={{ marginBottom: -4 }}
+                  >
+                    JUN
+                  </Text>
+                  <Text
+                    color={theme.colors.primary}
+                    fontSize={26}
+                    weight="Bold"
+                  >
+                    22
+                  </Text>
+                </>
+              )}
             </S.Date>
             <View>
-              <Text fontSize={22} weight="Bold" color={theme.colors.midGrey}>
-                Culto de celebração
-              </Text>
+              {title && (
+                <Text fontSize={22} weight="Bold" color={theme.colors.midGrey}>
+                  {title}
+                </Text>
+              )}
               <S.Time>
                 <Feather
                   name="clock"
@@ -76,7 +116,11 @@ const More: React.FC = () => {
                   color={theme.colors.lightGrey}
                   style={{ marginRight: 5 }}
                 />
-                <Text fontSize={16}>às 18h30</Text>
+                {time && (
+                  <Text fontSize={16}>
+                    {`Às ${time.split(':')[0]}h${time.split(':')[1]}`}
+                  </Text>
+                )}
               </S.Time>
             </View>
           </S.Header>
@@ -89,9 +133,9 @@ const More: React.FC = () => {
           </Text>
         </S.Wrapper>
       </Default>
-      <S.Footer>
+      {/* <S.Footer>
         <Button>Fazer inscrição</Button>
-      </S.Footer>
+      </S.Footer> */}
     </>
   );
 };

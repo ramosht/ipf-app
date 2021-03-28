@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { Default } from '@templates/index';
-import { Text } from '@components/typography';
+
+import WeeklyEvents from './components/WeeklyEvents';
 
 const Schedule: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Schedule: React.FC = () => {
       header={{ title: 'Agenda', goBack: false, type: 'page' }}
       description="Veja nossa grade e reserve seu lugar"
     >
-      <Text>Aqui vai a agenda</Text>
+      <WeeklyEvents />
     </Default>
   );
 };

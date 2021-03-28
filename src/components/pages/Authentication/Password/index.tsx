@@ -82,42 +82,6 @@ const Password: React.FC = () => {
     user,
   ]);
 
-  const handleSignup = useCallback(() => {
-    login({ variables: { email, password } })
-      .then((res) => {
-        const { id } = res.data.login.user;
-        const { jwt } = res.data.login;
-
-        setUser({ ...user, id });
-        AsyncStorage.setItem('@IPF:authenticatedUser', JSON.stringify({ id }));
-        AsyncStorage.setItem('@IPF:token', jwt);
-        AsyncStorage.setItem('@IPF:userIsAuthenticated', 'true');
-        setUserIsAuthenticated(true);
-      })
-      .catch((error) => {
-        if (
-          error?.graphQLErrors[0] &&
-          error?.graphQLErrors[0].extensions.exception.code === 400
-        ) {
-          setLoginError('Senha incorreta');
-        } else {
-          Alert.alert(
-            'Ocorreu um erro',
-            'Não foi possível fazer login. Tente novamente mais tarde.',
-            [{ text: 'Tudo bem', onPress: () => navigation.goBack() }]
-          );
-        }
-      });
-  }, [
-    email,
-    login,
-    password,
-    navigation,
-    setUser,
-    setUserIsAuthenticated,
-    user,
-  ]);
-
   if (loadingLogin) {
     return <Loading />;
   }

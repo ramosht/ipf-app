@@ -8,6 +8,7 @@ import Button from './Button';
 import TextInput from './TextInput';
 import PasswordInput from './PasswordInput';
 import Loading from './Loading';
+import TextEmptyPage from './TextEmptyPage';
 
 // export it here
 export {
@@ -20,4 +21,5 @@ export {
   TextInput,
   PasswordInput,
   Loading,
+  TextEmptyPage,
 };
